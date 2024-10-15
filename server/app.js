@@ -2,9 +2,11 @@ import express from "express";
 import { dbConnection } from "./database/dbConnection.js";
 import dotenv from "dotenv"
 import allRouters from './routers/allRouters.js'
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 app.use(express.json())
+app.use(cookieParser);
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     console.log(`Full URL: ${req.originalUrl}`);

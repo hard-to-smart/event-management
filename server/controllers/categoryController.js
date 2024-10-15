@@ -47,3 +47,17 @@ export const deleteCategory = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+export const viewCategories = async (req, res) => {
+  try{
+    const categories = await Category.find().populate('titile').populate('description')
+    if (!categories || categories.length === 0) {
+      return res.status(404).json({ message: "No categories found" });
+    }
+    return res.status(200).json({ message: " Categories displayed successfully", categories});
+  }
+  catch(error){
+    console.log(error);
+    res.status(500).json({ message: "Server error", error });
+  }
+}

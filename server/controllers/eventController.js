@@ -75,3 +75,17 @@ export const deleteEvent = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+export const viewEvents = async (req, res) => {
+  try{
+    const events = await Event.find()
+    if (!events || events.length === 0) {
+      return res.status(404).json({ message: "No events found" });
+    }
+    return res.status(200).json({ message: "Events displayed successfully", events});
+  }
+  catch(error){
+    console.log(error);
+    res.status(500).json({ message: "Server error", error });
+  }
+}

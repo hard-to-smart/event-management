@@ -24,7 +24,7 @@ export const registerUser = async (req, res) => {
     });
 
     await user.save();
-
+    
     return res.status(201).json({
       message: "User created successfully",
       user: { id: user._id, name, email, phone },
@@ -37,7 +37,7 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { email, password , role} = req.body;
+    const { email, password, role } = req.body;
 
     const user = await User.findOne({ email });
 
@@ -52,7 +52,7 @@ export const loginUser = async (req, res) => {
     }
 
     const token = generateToken(user);
-
+    console.log(req.headers);
     res
       .cookie("auth_token", token, {
         httpOnly: false,
@@ -63,8 +63,13 @@ export const loginUser = async (req, res) => {
       .status(200)
       .json({
         message: "Login successful",
-        user: { id: user._id, email , role},
+        user: { id: user._id, email ,role},
       });
+    // res.status(200).json({
+    //   message: "Login successful",
+    //   user: { id: user._id, email, role },
+    //   token,
+    // });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error", error });
