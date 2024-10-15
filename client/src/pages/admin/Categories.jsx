@@ -1,9 +1,9 @@
 import React from 'react'
 
-const CategoryMngmnt = () => {
+const Categories = () => {
   return (
     <div>CategoryMngmnt</div>
   )
 }
 
-export default CategoryMngmnt
+export default Categories

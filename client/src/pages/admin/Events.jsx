@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EventMngmnt = () => {
+const Events = () => {
   return (
     
 
@@ -84,4 +84,4 @@ const EventMngmnt = () => {
   )
 }
 
-export default EventMngmnt
+export default Events

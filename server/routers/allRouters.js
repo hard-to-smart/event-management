@@ -3,7 +3,6 @@ import userRoutes from './userRouter.js'
 import categoryRoutes from './categoryRoutes.js'
 import eventRoutes from './eventRoutes.js'
 import bookingRoutes from './bookingRoutes.js'
-
 const router = express.Router();
 
 router.use('/user', userRoutes);
