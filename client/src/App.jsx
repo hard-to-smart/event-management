@@ -1,11 +1,16 @@
-import React from 'react'
-import { Routes } from './routes/AllRoutes'
-import './index.css'
+import React from "react";
+import { Routes } from "./routes/AllRoutes";
+import {Provider} from 'react-redux'
+import "./index.css";
+import store from "./redux/store";
 
 const App = () => {
   return (
-   <Routes/>
-  )
-}
+    <Provider store={store}>
+      {" "}
+      <Routes />
+    </Provider>
+  );
+};
 
-export default App
+export default App;
