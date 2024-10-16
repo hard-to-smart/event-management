@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/actions/authAction";
+import { selectLoginUser } from "../redux/slices/authSlice";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({})
-  const handleFormSubmit = (e)=>{
+  // const [loginData, setLoginData] = useState({})
+  const userData = useSelector(selectLoginUser);
+  const dispatch = useDispatch();
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    const formData = {};
-    formData = new FormData(e.target)
-    for (const [name, value] of formData.entries()){
-        formData[name]= value
+    const formData = new FormData(e.target);
+    const loginValues = {};
+    for (const [name, value] of formData.entries()) {
+      loginValues[name] = value;
     }
-    setLoginData((prev) => ({...prev, ...formData}))
-  }
-  console.log(loginData)
+    console.log('Login values:', loginValues);
+    dispatch(loginUser(loginValues));
+  };
+  console.log(userData)
   return (
     <section className="min-h-screen flex flex-col">
       <div className="flex flex-1 items-center justify-center">
@@ -25,7 +31,6 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                value={loginData.email}
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
                 placeholder="Email"
               />
@@ -34,7 +39,6 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
-                value={loginData.password}
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
                 placeholder="Password"
               />

@@ -24,7 +24,7 @@ export const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        // state.token = action.payload.token;
         state.isAuthenticated = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -54,4 +54,6 @@ export const authSlice = createSlice({
 });
 
 export const { clearError } = authSlice.actions;
+
+export const selectLoginUser = (state) => state.auth.user;
 export default authSlice.reducer;
