@@ -8,7 +8,7 @@ const Login = () => {
   // const [loginData, setLoginData] = useState({})
   const userData = useSelector(selectLoginUser);
   const dispatch = useDispatch();
-  const handleFormSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const loginValues = {};
