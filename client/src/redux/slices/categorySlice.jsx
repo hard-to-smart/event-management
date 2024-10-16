@@ -29,6 +29,7 @@ const categorySlice = createSlice({
             })
             .addCase(addCategory.fulfilled, (state, action) =>{
                 state.isLoading = false,
+                console.log(action.payload, "in category slice")
                 state.categoryList = state.categoryList.push(action.payload)
             })
             .addCase(deleteCategory.fulfilled, (state,action) => {
@@ -38,4 +39,5 @@ const categorySlice = createSlice({
     }
 })
 
+export const selectCategoryList = (state)=> {return state.category.categoryList}
 export default categorySlice.reducer;

@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { registerUser } from "../redux/actions/authAction";
 
-const Register = () => {
+const Register = ({onRegisterSuccess, onClose}) => {
   const dispatch = useDispatch()
   const handleRegisterSubmit= (e)=>{
+    e.preventDefault()
     const formData = new FormData(e.target);
     const registerValues = {}
     for (const [name, value] of formData.entries()) {
@@ -13,11 +14,10 @@ const Register = () => {
     }
     console.log(registerValues, "register values")
     dispatch(registerUser(registerValues))
-
+    onRegisterSuccess()
   }
 
   return (
-    <section className="min-h-screen flex flex-col">
       <div className="flex flex-1 items-center justify-center">
         <div className="rounded-lg sm:border-2 px-4 lg:px-24 py-16 lg:max-w-xl sm:max-w-md w-full text-center">
           <form className="text-center" onSubmit={handleRegisterSubmit}>
@@ -27,6 +27,7 @@ const Register = () => {
             <div className="py-2 text-left">
               <input
                 type="name"
+                name="name"
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
                 placeholder="Name"
               />
@@ -34,6 +35,7 @@ const Register = () => {
             <div className="py-2 text-left">
               <input
                 type="email"
+                name="email"
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-noneblock w-full py-2 px-4 rounded-lg focus:border-gray-700 "
                 placeholder="Email"
               />
@@ -41,6 +43,7 @@ const Register = () => {
             <div className="py-2 text-left">
               <input
                 type="phone"
+                name="phone"
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-noneblock w-full py-2 px-4 rounded-lg focus:border-gray-700 "
                 placeholder="Phone Number"
               />
@@ -48,6 +51,7 @@ const Register = () => {
             <div className="py-2 text-left">
               <input
                 type="password"
+                name="password"
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
                 placeholder="Password"
               />
@@ -75,7 +79,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </section>
   );
 };
 

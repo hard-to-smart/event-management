@@ -11,7 +11,7 @@ export const createEvent = async (req, res) => {
       location,
       time,
       organiser,
-      attendees = [],
+      // attendees = [],
     } = req.body;
 
     if (!title || !date || !category || !location || !time) {

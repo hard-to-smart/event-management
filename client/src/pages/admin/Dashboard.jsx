@@ -1,8 +1,11 @@
 import React from 'react'
+import SideNavbar from '../../components/SideNavbar'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div className='flex'> 
+
+    </div>
   )
 }
 

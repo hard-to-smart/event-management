@@ -4,6 +4,7 @@ import { Event } from "../models/eventSchema.js";
 export const createCategory = async (req, res) => {
   try {
     const { title, description } = req.body;
+    const imageUrl = await uploadToCloudinary(req);
     const exisitingCategory = await Category.findOne({ title });
     if (exisitingCategory) {
       return res
@@ -13,6 +14,7 @@ export const createCategory = async (req, res) => {
     const category = new Category({
       title,
       description,
+      image : imageUrl
     });
 
     await category.save();
@@ -50,7 +52,7 @@ export const deleteCategory = async (req, res) => {
 
 export const viewCategories = async (req, res) => {
   try{
-    const categories = await Category.find().populate('titile').populate('description')
+    const categories = await Category.find()
     if (!categories || categories.length === 0) {
       return res.status(404).json({ message: "No categories found" });
     }

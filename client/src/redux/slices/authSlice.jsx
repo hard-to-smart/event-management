@@ -5,7 +5,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    token: null,
+    // token: null,
     isAuthenticated: false,
     isLoading: false,
     error: null,
@@ -26,6 +26,7 @@ export const authSlice = createSlice({
         state.user = action.payload.user;
         // state.token = action.payload.token;
         state.isAuthenticated = true;
+        console.log(action.payload,"in slice")
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -33,7 +34,7 @@ export const authSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
-        state.token = null;
+        // state.token = null;
         state.isAuthenticated = false;
       })
       .addCase(registerUser.pending, (state) => {
@@ -43,8 +44,7 @@ export const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
+        // state.token = action.payload.token;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -54,6 +54,7 @@ export const authSlice = createSlice({
 });
 
 export const { clearError} = authSlice.actions;
-
+export const selectError = (state) => state.auth.error;
 export const selectLoginUser = (state) => state.auth.user;
+export const selectIsAuthenticated = (state) => state.auth.isAuthenticated
 export default authSlice.reducer;

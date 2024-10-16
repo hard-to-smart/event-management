@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/view', viewEvents);
 // admin route
-router.post('/add', adminMiddleware,createEvent);
+// router.post('/add', adminMiddleware, upload.single("image"), createEvent);
 router.delete('/delete', adminMiddleware ,deleteEvent);
 export default router;
