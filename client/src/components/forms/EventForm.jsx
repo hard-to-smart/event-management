@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { viewCategories } from "../../redux/actions/categoryAction";
+import { selectCategoryList } from "../../redux/slices/categorySlice";
+import { addEvent } from "../../redux/actions/eventAction";
 
-const EventForm = () => {
+const EventForm = ({onClose}) => {
+  const dispatch = useDispatch();
+  const categoryList = useSelector(selectCategoryList);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    imageUrl: "",
+    date: "",
+    time: "",
+    location: "",
+    category: "",
+  });
+
+  useEffect(() => {
+    dispatch(viewCategories());
+  }, [dispatch]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleEventSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addEvent(formData))
+    onClose();
+  };
+
   return (
     <section className="flex flex-col">
       <div className="flex flex-1 items-center justify-center">
@@ -13,25 +47,77 @@ const EventForm = () => {
               <input
                 type="text"
                 name="title"
-                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
-                placeholder="Event Title"
+                value={formData.title}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+                placeholder="Title"
               />
             </div>
             <div className="py-2 text-left">
               <input
                 type="text"
                 name="description"
-                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
-                placeholder="E description"
+                value={formData.description}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+                placeholder="Description"
               />
             </div>
             <div className="py-2 text-left">
               <input
                 type="text"
                 name="imageUrl"
-                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
-                placeholder="Image Url"
+                value={formData.imageUrl}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+                placeholder="Image URL"
               />
+            </div>
+            <div className="flex">
+            <div className="w-1/2 py-2 text-left">
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+              />
+            </div>
+            <div className="w-1/2 py-2 text-left">
+              <input
+                type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+              />
+            </div>
+            </div>
+            <div className="py-2 text-left">
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+                placeholder="Location"
+              />
+            </div>
+            <div className="py-2 text-left">
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+              >
+                <option value="">Select Category</option>
+                {categoryList.categories &&
+                  categoryList.categories.map((category) => (
+                    <option key={category.id} value={category.title}>
+                      {category.title}
+                    </option>
+                  ))}
+              </select>
             </div>
             <div className="py-2">
               <button

@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addCategory } from '../../redux/actions/categoryAction';
 
-const CategoryForm = () => {
+const CategoryForm = ({onClose}) => {
   const dispatch = useDispatch()
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    image: ""
+  })
+  const handleInputChange=(e)=>{
+   setFormData({...formData, [e.target.name] : e.target.value })
+  }
+
   const handleCategorySubmit=(e)=>{
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const categoryValues = {}
-    for(const [name, value] of  formData.entries()){
-      categoryValues[name] = value;
-    }
-    dispatch(addCategory(categoryValues))
+    dispatch(addCategory(formData))
+    onClose()
   }
+  
   return (
     <section className="flex flex-col">
     <div className="flex flex-1 items-center justify-center">
@@ -25,6 +31,7 @@ const CategoryForm = () => {
             <input
               type="text"
               name="title"
+              onChange={handleInputChange}
               className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
               placeholder="Category Title"
             />
@@ -33,6 +40,7 @@ const CategoryForm = () => {
             <input
               type="text"
               name="description"
+              onChange={handleInputChange}
               className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
               placeholder="Category description"
             />
@@ -40,7 +48,8 @@ const CategoryForm = () => {
           <div className="py-2 text-left">
             <input
               type="text"
-              name="imageUrl"
+              name="image"
+              onChange={handleInputChange}
               className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
               placeholder="Image Url"
             />

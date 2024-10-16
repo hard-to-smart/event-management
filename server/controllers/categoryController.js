@@ -3,8 +3,7 @@ import { Event } from "../models/eventSchema.js";
 
 export const createCategory = async (req, res) => {
   try {
-    const { title, description } = req.body;
-    const imageUrl = await uploadToCloudinary(req);
+    const { title, description, image} = req.body;
     const exisitingCategory = await Category.findOne({ title });
     if (exisitingCategory) {
       return res
@@ -14,13 +13,13 @@ export const createCategory = async (req, res) => {
     const category = new Category({
       title,
       description,
-      image : imageUrl
+      image
     });
 
     await category.save();
     return res.status(201).json({
       message: "Category added successfully",
-      category: { id: category._id, title, description },
+      category: { id: category._id, title, description, image},
     });
   } catch (error) {
     console.log(error);
@@ -56,6 +55,7 @@ export const viewCategories = async (req, res) => {
     if (!categories || categories.length === 0) {
       return res.status(404).json({ message: "No categories found" });
     }
+    console.log(categories, "inside categories controller")
     return res.status(200).json({ message: " Categories displayed successfully", categories});
   }
   catch(error){

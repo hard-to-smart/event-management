@@ -1,7 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CategoryCard = () => {
+const CategoryCard = ({
+  title,
+  description,
+  image,
+  id,
+  handleCardClick
+}) => {
   return (
     <>
       <style>
@@ -18,10 +24,10 @@ const CategoryCard = () => {
           }
         `}
       </style>
-      <div
-        className="flex flex-col rounded-xl shadow-3xl justify-end w-72 sm:w-96 h-96 bg-white bg-center text-gray-800 shadow-md overflow-hidden cursor-pointer"
+      <div onClick={()=>handleCardClick(title)}
+        className="flex flex-col rounded-xl shadow-3xl bg-cover justify-end sm:w-96 h-96 bg-white bg-center text-gray-800 shadow-md overflow-hidden cursor-pointer"
         style={{
-          backgroundImage: `url('https://images.squarespace-cdn.com/content/v1/56314693e4b0f04840290588/1539768566469-X90NEGGS1Q9YOD23DW5T/Screen+Shot+2018-10-17+at+10.29.01.png')`,
+          backgroundImage: `url(${image})`,
         }}
       >
         <div
@@ -31,12 +37,8 @@ const CategoryCard = () => {
             animation: "slideIn 0.5s ease-out forwards",
           }}
         >
-          <h3 className="text-xl font-bold pb-2">Happy Nowruz 1400</h3>
-          <p className="truncate text-gray-500 text-sm">
-            Nowruz is the Persian New Year, which begins on the Spring equinox,
-            marking the first day of Farvardin, the first month of the Iranian
-            solar calendar.
-          </p>
+          <h3 className="text-xl font-bold pb-2">{title}</h3>
+          <p className="truncate text-gray-500 text-sm">{description}</p>
         </div>
       </div>
     </>

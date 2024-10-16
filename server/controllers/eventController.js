@@ -6,12 +6,11 @@ export const createEvent = async (req, res) => {
     const {
       title,
       description,
-      category,
+      image,
       date,
-      location,
       time,
-      organiser,
-      // attendees = [],
+      location,
+      category
     } = req.body;
 
     if (!title || !date || !category || !location || !time) {
@@ -40,12 +39,13 @@ export const createEvent = async (req, res) => {
     const event = new Event({
       title,
       description,
-      category: validateCategory._id,
+      image,
       date,
-      location,
       time,
-      organiser,
-      attendees,
+      location,
+      category: validateCategory._id
+     
+
     });
 
     await event.save();

@@ -26,16 +26,9 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: [true, "Event time is required"],
     },
-    organiser: {
-      type: String,
-    },
-    // attendees:
-    //   [
-    //     {
-    //       type: mongoose.Schema.Types.ObjectId,
-    //       ref: "User"
-    //     }
-    //   ]
+    image:{
+      type:String,
+    }
   },
   { timestamps: true }
 );

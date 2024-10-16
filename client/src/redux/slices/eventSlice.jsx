@@ -34,4 +34,5 @@ const eventSlice = createSlice({
   },
 });
 
+export const selectEvents = (state) => state?.events?.eventList || [];
 export default eventSlice.reducer;

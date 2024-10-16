@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { notify } from "../../utils/toast";
 
 export const viewEvents = createAsyncThunk(
-  "/event/viewevents",
-  async ({ rejectWithValue }) => {
+  "/event/viewEvents",
+  async (_,{ rejectWithValue }) => {
     try {
-      const response = await axios.get("/api/event/view");
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/event/view`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -17,13 +18,15 @@ export const viewEvents = createAsyncThunk(
 );
 
 export const addEvent = createAsyncThunk(
-    '/event/addevent', async (eventData, {rejectWithValue}) =>{
+    '/event/addEvent', async (eventData, {rejectWithValue}) =>{
         try{
-            const response = await axios.post('/api/event/add');
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/event/add`, eventData, {withCredentials:true});
+            notify(response?.data?.message, 'success')
             return response.data;
         }
         catch(error){
             console.log(error);
+            notify(error.response?.data?.message || 'Event creation failed');
             return rejectWithValue(
                 error.response.data.message || "Event creation failed"
             )
@@ -31,9 +34,9 @@ export const addEvent = createAsyncThunk(
     }
 )
 
-export const deleteEvent = createAsyncThunk('/event/deleteevent', async (eventData, {rejectWithValue})=>{
+export const deleteEvent = createAsyncThunk('/event/deleteEvent', async (eventData, {rejectWithValue})=>{
     try{
-        const response = await axios.delete('/api/event/delete')
+        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/event/delete`)
         return response.data;
     }
     catch(error){

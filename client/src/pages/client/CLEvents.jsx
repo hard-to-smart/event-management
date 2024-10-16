@@ -1,12 +1,13 @@
 import React from 'react'
 import EventCard from '../../components/EventCard'
 import { Link } from 'react-router-dom'
+import Events from '../../components/Events'
 
-const SingleCategory = () => {
+const CLEvents = () => {
   console.log("on single category page")
   return (
-   <EventCard/>
+    <Events/>
   )
 }
 
-export default SingleCategory
+export default CLEvents

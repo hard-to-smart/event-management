@@ -17,6 +17,7 @@ const categorySlice = createSlice({
             })
             .addCase(viewCategories.fulfilled, (state, action) =>{
                 state.isLoading = false,
+                console.log(action.payload, "category slice")
                 state.categoryList = action.payload
             })
             .addCase(viewCategories.rejected, (state, action) =>{
