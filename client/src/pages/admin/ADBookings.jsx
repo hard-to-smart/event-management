@@ -1,5 +1,5 @@
 import React from "react";
-import BookingTable from "../../components/BookingTable";
+import BookingTable from "../../components/booking/BookingTable";
 
 const ADBookings = () => {
   return (

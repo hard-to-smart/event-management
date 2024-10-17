@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    background: radial-gradient(circle at 10% 20%, rgb(255, 246, 236) 39.5%, rgba(100, 46, 122, 0.23) 100.2%);
 
+
+
+}
 /* #F7DFD4
 Macaron
 #EABCAC

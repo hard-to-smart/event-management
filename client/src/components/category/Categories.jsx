@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCategoryList } from "../redux/slices/categorySlice";
-import CategoryCard from "../components/CategoryCard";
-import { viewCategories } from "../redux/actions/categoryAction";
+import { selectCategoryList } from "../../redux/slices/categorySlice";
+import CategoryCard from "./CategoryCard";
+import { viewCategories } from "../../redux/actions/categoryAction";
 import { useNavigate } from "react-router-dom";
+import nodata from '../../assets/nodata.png'
 
 const Categories = () => {
   const categoryList = useSelector(selectCategoryList);
@@ -31,7 +32,10 @@ const Categories = () => {
             />
           ))
         ) : (
-          <p>No categories available.</p>
+          <div className="flex flex-col items-center">
+            <img src={nodata} alt="No data" className="w-64 h-64 opacity-60" />
+            <p className="text-xl text-gray-600 mt-4">No categories available.</p>
+          </div>
         )}
       </div>
     </div>

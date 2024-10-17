@@ -11,6 +11,7 @@ const categorySchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default:'https://static.thenounproject.com/png/1077596-200.png',
     required: false,
   }
 },  {timestamps: true},

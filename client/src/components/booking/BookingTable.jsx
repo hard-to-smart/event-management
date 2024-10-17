@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import BookingRow from "./BookingRow";
 import { useDispatch, useSelector } from "react-redux";
-import { viewAllBookings } from "../redux/actions/bookingAction";
+import { viewAllBookings } from "../../redux/actions/bookingAction";
 
 const BookingTable = () => {
   const bookings = useSelector((store) => store.booking.allBookings);

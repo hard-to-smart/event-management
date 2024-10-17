@@ -2,10 +2,10 @@ import React from "react";
 import {
   selectIsAuthenticated,
   selectLoginUser,
-} from "../redux/slices/authSlice";
+} from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { createBooking } from "../redux/actions/bookingAction";
-import { deleteEvent } from "../redux/actions/eventAction";
+import { createBooking } from "../../redux/actions/bookingAction";
+import { deleteEvent } from "../../redux/actions/eventAction";
 
 const SingleEventCard = ({event}) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);

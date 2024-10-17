@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBooking } from "../redux/actions/bookingAction";
-import { selectLoginUser } from "../redux/slices/authSlice";
+import { updateBooking } from "../../redux/actions/bookingAction";
+import { selectLoginUser } from "../../redux/slices/authSlice";
 
 const BookingRow = ({booking}) => {
     const dispatch = useDispatch()

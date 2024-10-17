@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CategoryForm from "../../components/forms/CategoryForm";
+import CategoryForm from "../../components/category/CategoryForm";
 import Modal from "../../components/modal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCategoryList } from "../../redux/slices/categorySlice";
-import Categories from "../../components/Categories";
+import Categories from "../../components/category/Categories";
 import { viewCategories } from "../../redux/actions/categoryAction";
 
 const ADCategories = () => {
@@ -19,7 +19,7 @@ const ADCategories = () => {
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
-    <div className="relative h-screen overflow-scroll p-4">
+    <div className="relative h-screen overflow-scroll p-4 font-poppins">
       <Categories />
       <button
         onClick={handleOpenModal}

@@ -1,7 +1,5 @@
 import React from 'react'
-import EventCard from '../../components/EventCard'
-import { Link } from 'react-router-dom'
-import Events from '../../components/Events'
+import Events from '../../components/event/Events'
 
 const CLEvents = () => {
   return (

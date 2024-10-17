@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Events from '../../components/Events';
-import EventForm from '../../components/forms/EventForm'
+import Events from '../../components/event/Events';
+import EventForm from '../../components/event/EventForm'
 import Modal from '../../components/modal';
 const ADEvents = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);

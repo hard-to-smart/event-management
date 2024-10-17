@@ -6,18 +6,18 @@ const SideNavbar = () => {
   return (
     <aside
       id=" logo-sidebar"
-      className="z-10 ml-0  w-64 h-screen pt-20 transition-transform -translate-x-full bg-[#DDD0C8] border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+      className="z-10 ml-0  w-64 h-screen pt-20 transition-transform -translate-x-full bg-[#DDD0C8] border-r border-gray-200 sm:translate-x-0 "
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 pb-4 overflow-y-auto bg-[#DDD0C8] dark:bg-gray-800">
+      <div className="h-full px-3 pb-4 overflow-y-auto bg-[#DDD0C8]">
         <ul className="space-y-2 font-medium">
           <li>
             <NavLink
               to='admin'
-              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#C5B2A3] group"
             >
               <svg
-                className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 "
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -31,10 +31,10 @@ const SideNavbar = () => {
           </li>
           <li>
             <NavLink  to='admin/bookings'
-              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              className="flex items-center p-2 text-white rounded-lg hover:bg-[#C5B2A3]  group"
             >
               <svg
-                className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 "
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"

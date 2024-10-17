@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { registerUser } from "../redux/actions/authAction";
 
-const Register = ({onRegisterSuccess, onClose}) => {
+const Register = ({onRegisterSuccess, onClose, setIsRegister}) => {
   const dispatch = useDispatch()
   const handleRegisterSubmit= (e)=>{
     e.preventDefault()
@@ -70,12 +70,12 @@ const Register = ({onRegisterSuccess, onClose}) => {
                     </div> */}
           <div className="text-center mt-12">
             <span>Already have an account?</span>
-            <Link
-              to="/login"
+            <button onClick={()=> setIsRegister((prev)=> !prev)}
+              
               className="font-light text-md text-indigo-600 underline  hover:text-indigo-800"
             >
               Sign In
-            </Link>
+            </button>
           </div>
         </div>
       </div>

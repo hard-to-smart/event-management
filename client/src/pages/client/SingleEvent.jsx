@@ -1,5 +1,5 @@
 import React from "react";
-import SingleEventCard from "../../components/SingleEventCard";
+import SingleEventCard from "../../components/event/SingleEventCard";
 import { useLocation } from "react-router-dom";
 
 const SingleEvent = () => {
@@ -7,7 +7,6 @@ const SingleEvent = () => {
   const { event } = location.state || {};
 
   return event ? (
-
     <SingleEventCard event={event} />
   ) : (
     <p>Event details not available</p>

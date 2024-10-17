@@ -35,11 +35,11 @@ const Header = () => {
   }
   return (
     <header>
-      <nav className="bg-[#DDD0C8] border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-[#DDD0C8]">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+      <nav className="bg-[#DDD0C8] border-b-2 border-[#C5B2A3] px-4 lg:px-6 py-3 shadow-xl">
+        <div className="flex font-serif flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <NavLink to="/" className="flex flex-row gap-2 items-center">
-            <img src={logo} className=" h-6 sm:h-9" alt="Flowbite Logo" />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+            <img src={logo} className=" h-6 sm:h-10" alt=" Logo" />
+            <span className="self-center text-2xl text-[#7A5E48]  font-semibold whitespace-nowrap">
               EVE
             </span>
           </NavLink>
@@ -47,7 +47,7 @@ const Header = () => {
             { !userData && !isAuthenticated &&
             <button
               onClick={handleOpenModal}
-              className={`hover:bg-gray-50  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none`}
+              className={` bg-[#C5B2A3] focus:ring-4 focus:ring-red-100 text-[#7A5E48]  font-semibold rounded-lg text-sm  px-5 py-2.5 text-center me-2 mb-2`}
             >
               Log in
             </button>
@@ -55,14 +55,14 @@ const Header = () => {
             <Modal
               isOpen={isModalOpen}
               onClose={handleCloseModal}
-              element={isRegister ? <Register onRegisterSuccess={() => setIsRegister(false)} onClose={handleCloseModal}/> : <Login onRegisterClick={() => setIsRegister(true)} onClose={handleCloseModal} />} 
+              element={isRegister ? <Register onRegisterSuccess={() => setIsRegister(false)} setIsRegister={setIsRegister} onClose={handleCloseModal}/> : <Login onRegisterClick={() => setIsRegister(true)} onClose={handleCloseModal} />} 
               // element={<Login isOpen={isModalOpen} onClose={handleCloseModal} />}
             />
             {
               userData && isAuthenticated && 
               <button
               onClick={handleUserLogout}
-              className={`hover:bg-gray-50  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none`}
+              className={`bg-[#C5B2A3] focus:ring-4 focus:ring-red-100 text-[#7A5E48]  font-semibold rounded-lg text-sm  px-5 py-2.5 text-center me-2 mb-2`}
             >
               Log out
             </button>
@@ -81,15 +81,13 @@ const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8  lg:mt-0">
               <li>
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 rounded bg-primary-700 lg:bg-transparent font-semibold lg:p-0 ${
-                      isActive
-                        ? "text-white dark:text:white font-bold"
-                        : " text-gray-400 dark:text:gray-400"
+                    `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${
+                      isActive ? "text-[#946f54]" : "text-[#b0aead]"
                     } `
                   }
                 >
@@ -100,11 +98,9 @@ const Header = () => {
                 <NavLink
                   to="/category"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 rounded bg-primary-700 lg:bg-transparent font-semibold lg:p-0 ${
-                      isActive
-                        ? "text-white dark:text:white font-bold"
-                        : " text-gray-400 dark:text:gray-400"
-                    } `
+                  `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${
+                    isActive ? "text-[#946f54]" : "text-[#b0aead]"
+                  } `
                   }
                 >
                   Category
@@ -114,11 +110,9 @@ const Header = () => {
                 <NavLink
                   to="/contact"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 rounded bg-primary-700 lg:bg-transparent font-semibold lg:p-0 ${
-                      isActive
-                        ? "text-white dark:text:white font-bold"
-                        : " text-gray-400 dark:text:gray-400"
-                    } `
+                  `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${
+                    isActive ? "text-[#946f54]" : "text-[#b0aead]"
+                  } `
                   }
                 >
                   Contact Us

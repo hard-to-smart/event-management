@@ -3,11 +3,11 @@ import logo from '../assets/logo.png'
 import { NavLink } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="bg-[#323232] shadow dark:bg-[#323232] ">
+    <footer className="bg-gradient-to-b from-[#4A4A4A] to-[#1F1F1F] font-serif shadow-inner">
       <div className="w-full max-w-screen-xl mx-auto px-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <NavLink
-            className="flex items-center   sm:mb-0 space-x-3 "
+            className="flex items-center  sm:mb-0 space-x-3 "
           >
             <img
               src={logo}
@@ -27,21 +27,15 @@ const Footer = () => {
                 Category
               </NavLink>
             </li>
-            {/* <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                Licensing
-              </a>
-            </li> */}
             <li>
-              <NavLink to='/about' className="hover:underline">
-                About Us
+              <NavLink to='/contact' className="hover:underline">
+                Contact Us
               </NavLink>
             </li>
           </ul>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2024{" "}
+        <hr className="my-6 border-[#C5B2A3] sm:mx-auto" />       
+        <span className="block text-sm text-stone-200 sm:text-center">          © 2024{" "}
           . All Rights Reserved.
         </span>
       </div>

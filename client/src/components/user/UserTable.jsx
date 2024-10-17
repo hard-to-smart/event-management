@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import UserRow from "./UserRow";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, fetchUsers } from "../redux/actions/userAction";
+import { deleteUser, fetchUsers } from "../../redux/actions/userAction";
 
 const UserTable = () => {
   const {users} = useSelector((store)=>store.user);
