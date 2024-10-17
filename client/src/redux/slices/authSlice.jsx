@@ -24,7 +24,6 @@ export const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
-        // state.token = action.payload.token;
         state.isAuthenticated = true;
         console.log(action.payload,"in slice")
       })
@@ -34,7 +33,6 @@ export const authSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
-        // state.token = null;
         state.isAuthenticated = false;
       })
       .addCase(registerUser.pending, (state) => {
@@ -44,7 +42,6 @@ export const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
-        // state.token = action.payload.token;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;

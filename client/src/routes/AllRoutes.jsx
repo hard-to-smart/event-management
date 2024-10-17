@@ -17,7 +17,7 @@ import ADEvents from "../pages/admin/ADEvents";
 import ADUsers from "../pages/admin/ADUsers";
 import AdminRoute from "./AdminRoutes";
 import PrivateRoute from "./PrivateRoutes";
-
+import Loading from "../components/loading/loading"
 const AllRoutes = createBrowserRouter([
   {
     path: "/",
@@ -119,5 +119,5 @@ const AllRoutes = createBrowserRouter([
 ]);
 
 export const Routes = () => {
-  return <RouterProvider router={AllRoutes}></RouterProvider>;
+  return <RouterProvider router={AllRoutes} fallbackElement={<Loading/>}></RouterProvider>;
 };
