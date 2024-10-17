@@ -5,23 +5,21 @@ import { User } from "../models/userSchema.js";
 
 export const createBooking = async (req, res) => {
   try {
+    console.log("inside create booking");
     const { userId, eventId } = req.body;
-    if (
-      userId === (await User.findById({ userId })) &&
-      eventId === (await Event.findById({ eventId }))
-    ) {
+    console.log(userId, eventId, "inside booking controller");
+
+    const user = await User.findById(userId);
+    const event = await Event.findById(eventId);
+    if (user && event) {
       const newBooking = new Booking({
         event: eventId,
         user: userId,
       });
-      newBooking.save();
-      return response
-        .status(201)
-        .json({ message: "Event booked successfully" });
+      await newBooking.save();
+      return res.status(200).json({ message: "Event booked successfully" });
     } else {
-      return response
-        .status(400)
-        .json({ message: "Event or User does not exist" });
+      return res.status(400).json({ message: "Event or User does not exist" });
     }
   } catch (error) {
     console.error(error);
@@ -33,9 +31,6 @@ export const createBooking = async (req, res) => {
 export const viewallBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
-      .populate("event")
-      .populate("user")
-      .populate("status");
     if (!bookings || bookings.length === 0) {
       return res.status(404).json({ message: "No bookings found" });
     }
@@ -83,18 +78,41 @@ export const rejectBooking = async (req, res) => {
 };
 
 export const approveBooking = async (req, res) => {
-  try{
-    const {bookingId} = req.body;
+  try {
+    const { bookingId } = req.body;
     const booking = await Booking.findById({ _id: bookingId });
     if (!booking) {
       return res.status(404).json({ message: "Booking not found" });
     }
-    booking.status = "approved"
+    booking.status = "approved";
     await booking.save();
     return res.status(200).json({ message: "Booking approved successfully" });
-  }
-  catch(error){
+  } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error", error });
   }
-}
+};
+export const updateBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { action } = req.body;
+
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    if (action) {
+      booking.status = action;
+    }
+
+    await booking.save();
+
+    return res
+      .status(200)
+      .json({ message: "Booking updated successfully", booking });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error", error });
+  }
+};

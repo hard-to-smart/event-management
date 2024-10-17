@@ -5,7 +5,6 @@ export const authMiddleware = async (req, res, next) =>{
     if(!token){
         return res.status(401).json({message: "Unauthorized request. Token not provided"});
     }
-    console.log(token , "token from auth")
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;

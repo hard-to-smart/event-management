@@ -1,13 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { notify } from "../../utils/toast";
 
 export const createBooking = createAsyncThunk(
   "booking/createBooking",
-  async (bookingData, { rejectWithValue }) => {
+  async ({ userId, eventId }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/booking/create`, bookingData);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/booking/create`,
+        { userId, eventId },
+        { withCredentials: true }
+      );
+      notify(response?.data?.message, "success");
       return response.data;
     } catch (error) {
+      notify(error.response?.data?.message || "Adding booking failed");
       return rejectWithValue(error.response.data);
     }
   }
@@ -17,9 +24,13 @@ export const viewBookingById = createAsyncThunk(
   "booking/viewBookingByUserId",
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/booking/view?userId=${userId}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/booking/view?userId=${userId}`
+      );
+      notify(response?.data?.message, "success");
       return response.data;
     } catch (error) {
+      notify(error.response?.data?.message || "Fetching user bookings failed");
       return rejectWithValue(error.response.data);
     }
   }
@@ -27,11 +38,31 @@ export const viewBookingById = createAsyncThunk(
 
 export const viewAllBookings = createAsyncThunk(
   "booking/viewAllBookings",
-  async ( { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/booking/view-all`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/booking/view-all`, {withCredentials:true}
+      );
+      notify(response?.data?.message, "success");
       return response.data;
     } catch (error) {
+      notify(error.response?.data?.message || "Fetching all bookings failed");
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateBooking = createAsyncThunk(
+  "booking/updateBooking",
+  async ({ id, action }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_BASE_URL}/api/booking/${id}`, {action}
+      );
+      notify(response?.data?.message, "success");
+      return response.data;
+    } catch (error) {
+      notify(error.response?.data?.message || "Failed to change action status");
       return rejectWithValue(error.response.data);
     }
   }

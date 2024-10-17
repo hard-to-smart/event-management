@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 
 export const adminMiddleware = async (req, res, next) => {
   const token = req.cookies.auth_token
-  console.log(token)
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decoded;

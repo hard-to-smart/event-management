@@ -10,7 +10,7 @@ const EventForm = ({onClose}) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    imageUrl: "",
+    image: "",
     date: "",
     time: "",
     location: "",
@@ -66,8 +66,8 @@ const EventForm = ({onClose}) => {
             <div className="py-2 text-left">
               <input
                 type="text"
-                name="imageUrl"
-                value={formData.imageUrl}
+                name="image"
+                value={formData.image}
                 onChange={handleChange}
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
                 placeholder="Image URL"

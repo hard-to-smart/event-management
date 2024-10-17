@@ -22,16 +22,14 @@ export const createCategory = async (req, res) => {
       category: { id: category._id, title, description, image},
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Server error", error });
   }
 };
 
 export const deleteCategory = async (req, res) => {
   try {
-    const { title } = req.body;
-
-    const deleteCategory = await Category.findOne({ title });
+    const id = req.params.id;
+    const deleteCategory = await Category.findById(id);
 
     if (!deleteCategory) {
       return res.status(404).json({ message: "Category not found" });
@@ -55,7 +53,6 @@ export const viewCategories = async (req, res) => {
     if (!categories || categories.length === 0) {
       return res.status(404).json({ message: "No categories found" });
     }
-    console.log(categories, "inside categories controller")
     return res.status(200).json({ message: " Categories displayed successfully", categories});
   }
   catch(error){

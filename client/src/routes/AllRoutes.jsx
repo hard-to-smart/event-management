@@ -8,12 +8,15 @@ import SingleCategory from "../pages/client/CLEvents";
 import SingleEvent from "../pages/client/SingleEvent";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import ADBookings from "../pages/admin/Bookings";
+import ADBookings from "../pages/admin/ADBookings";
 import ADProfile from "../pages/admin/Profile";
 import ADCategories from "../pages/admin/ADCategories";
 import ADSingleEvent from "../pages/admin/SingleEvent";
 import Dashboard from "../pages/admin/Dashboard";
 import ADEvents from "../pages/admin/ADEvents";
+import ADUsers from "../pages/admin/ADUsers";
+import AdminRoute from "./AdminRoutes";
+import PrivateRoute from "./PrivateRoutes";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -23,42 +26,44 @@ const AllRoutes = createBrowserRouter([
       {
         // Admin routing
         path: "admin",
-        // element: <AdminRoutes element={<Dashboard />} />,
-        // element: <AdminRoutes/>
         children: [
           {
             index: true,
-            element: <Dashboard />,
+            element: <AdminRoute element={<Dashboard />} />,
           },
           {
             path: "category",
             children: [
               {
                 index: true,
-                element: <ADCategories />,
+                element: <AdminRoute element={<ADCategories />}/>,
               },
               {
                 path: ":id",
                 children: [
                   {
                     index: true,
-                    element: <ADEvents />,
+                    element: <AdminRoute element={<ADEvents />}/>,
                   },
                   {
-                    path: "events/:eventId",
-                    element: <ADSingleEvent />,
+                    path: "event/:id",
+                    element: <AdminRoute element={<ADSingleEvent />}/>,
                   },
                 ],
               },
             ],
           },
           {
+            path:'users',
+            element: <AdminRoute element={<ADUsers/>}/>
+          },
+          {
             path: "profile",
-            element: <ADProfile />,
+            element: <AdminRoute element={<ADProfile />}/>
           },
           {
             path: "bookings",
-            element: <ADBookings />,
+            element: <AdminRoute element={<ADBookings />}/>,
           },
         ],
       },
@@ -82,7 +87,7 @@ const AllRoutes = createBrowserRouter([
                 element: <SingleCategory />,
               },
               {
-                path: "event/:eventId",
+                path: "event/:id",
                 element: <SingleEvent />,
               },
             ],
@@ -91,7 +96,7 @@ const AllRoutes = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: <PrivateRoute element={<Profile />}/>,
       },
       {
         path: "contact",

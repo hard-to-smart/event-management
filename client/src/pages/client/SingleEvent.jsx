@@ -1,10 +1,17 @@
-import React from 'react'
-import SingleEventCard from '../../components/SingleEventCard'
+import React from "react";
+import SingleEventCard from "../../components/SingleEventCard";
+import { useLocation } from "react-router-dom";
 
 const SingleEvent = () => {
-  return (
-    <SingleEventCard/>
-  )
-}
+  const location = useLocation();
+  const { event } = location.state || {};
 
-export default SingleEvent
+  return event ? (
+
+    <SingleEventCard event={event} />
+  ) : (
+    <p>Event details not available</p>
+  );
+};
+
+export default SingleEvent;

@@ -44,15 +44,13 @@ export const createEvent = async (req, res) => {
       time,
       location,
       category: validateCategory._id
-     
-
     });
 
     await event.save();
 
     return res.status(201).json({
       message: "Event added successfully",
-      event: { id: event._id, title, date, location },
+      event: { id: event._id, title, date, location , image},
     });
   } catch (error) {
     console.error(error);
@@ -62,8 +60,9 @@ export const createEvent = async (req, res) => {
 
 export const deleteEvent = async (req, res) => {
   try {
-    const { title } = req.body;
-    const deletedEvent = await Event.findOneAndDelete({title})
+    const id = req.params.id;
+    console.log(id)
+    const deletedEvent = await Event.findByIdAndDelete(id)
     if(deletedEvent){
         return res.status(200).json({message: "Event deleted successfully"})
     }
@@ -77,16 +76,17 @@ export const deleteEvent = async (req, res) => {
 };
 
 export const viewEvents = async (req, res) => {
-  try{
-    const  {category} = req.body
-    const events = await Event.find({category})
+  try {
+    const { categoryID } = req.body; 
+    const events = await Event.find({ category: categoryID });
+
     if (!events || events.length === 0) {
-      return res.status(404).json({ message: "No events found" });
+      return res.status(200).json({ message: "No events found" });
     }
-    return res.status(200).json({ message: "Events displayed successfully", events});
-  }
-  catch(error){
-    console.log(error);
+
+    else return res.status(200).json({ message: "Events displayed successfully", events });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error", error });
   }
-}
+};

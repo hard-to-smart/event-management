@@ -2,15 +2,20 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { notify } from "../../utils/toast";
 
+
 export const viewEvents = createAsyncThunk(
-  "/event/viewEvents",
-  async ({category},{ rejectWithValue }) => {
-    console.log(category, "in event action")
+  "event/viewEvents", 
+  async ({ category }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/event/view`, {category: category.id});
+      console.log(category, "in event action");
+      
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/event/view`, {
+        categoryID: category.id 
+      });
+      
       return response.data.events;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return rejectWithValue(
         error.response.data.message || "Unable to fetch events"
       );
@@ -37,11 +42,13 @@ export const addEvent = createAsyncThunk(
 
 export const deleteEvent = createAsyncThunk('/event/deleteEvent', async (eventData, {rejectWithValue})=>{
     try{
-        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/event/delete`)
+        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/event/delete/${eventData}`)
+        notify(response?.data?.message, 'success')
         return response.data;
     }
     catch(error){
         console.log(error);
+        notify(error.response?.data?.message || 'Event deletion failed');
         return rejectWithValue(
             error.response.data.message || "Event deletion failed"
         )

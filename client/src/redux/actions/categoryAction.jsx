@@ -37,9 +37,9 @@ export const addCategory = createAsyncThunk(
     }
 )
 
-export const deleteCategory = createAsyncThunk('/category/deletecategory', async (categoryData, {rejectWithValue})=>{
+export const deleteCategory = createAsyncThunk('/category/deletecategory', async (categoryId, {rejectWithValue})=>{
     try{
-        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/category/delete`)
+        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/category/delete/${categoryId}`)
         notify(response?.data?.message, 'success')
         return response.data;
     }
