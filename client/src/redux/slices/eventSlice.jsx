@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addEvent, deleteEvent, viewEvents } from "../actions/eventAction";
+import { act } from "react";
 
 const eventSlice = createSlice({
   name: 'events',

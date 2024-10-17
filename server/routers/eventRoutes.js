@@ -4,7 +4,7 @@ import { adminMiddleware } from '../middleware/adminMiddleware.js';
 
 const router = express.Router();
 
-router.get('/view', viewEvents);
+router.post('/view', viewEvents);
 // admin route
 router.post('/add', adminMiddleware, createEvent);
 router.delete('/delete', adminMiddleware ,deleteEvent);

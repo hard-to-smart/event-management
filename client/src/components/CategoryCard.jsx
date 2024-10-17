@@ -5,7 +5,7 @@ const CategoryCard = ({
   title,
   description,
   image,
-  id,
+  _id,
   handleCardClick
 }) => {
   return (
@@ -24,7 +24,7 @@ const CategoryCard = ({
           }
         `}
       </style>
-      <div onClick={()=>handleCardClick(title)}
+      <div onClick={()=>handleCardClick(title, _id)}
         className="flex flex-col rounded-xl shadow-3xl bg-cover justify-end sm:w-96 h-96 bg-white bg-center text-gray-800 shadow-md overflow-hidden cursor-pointer"
         style={{
           backgroundImage: `url(${image})`,

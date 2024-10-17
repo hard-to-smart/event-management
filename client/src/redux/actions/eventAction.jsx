@@ -4,10 +4,11 @@ import { notify } from "../../utils/toast";
 
 export const viewEvents = createAsyncThunk(
   "/event/viewEvents",
-  async (_,{ rejectWithValue }) => {
+  async ({category},{ rejectWithValue }) => {
+    console.log(category, "in event action")
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/event/view`);
-      return response.data;
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/event/view`, {category: category.id});
+      return response.data.events;
     } catch (error) {
       console.log(error);
       return rejectWithValue(

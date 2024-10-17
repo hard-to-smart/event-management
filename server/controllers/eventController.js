@@ -78,7 +78,8 @@ export const deleteEvent = async (req, res) => {
 
 export const viewEvents = async (req, res) => {
   try{
-    const events = await Event.find()
+    const  {category} = req.body
+    const events = await Event.find({category})
     if (!events || events.length === 0) {
       return res.status(404).json({ message: "No events found" });
     }

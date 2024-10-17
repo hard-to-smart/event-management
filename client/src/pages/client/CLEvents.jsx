@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import Events from '../../components/Events'
 
 const CLEvents = () => {
-  console.log("on single category page")
   return (
     <Events/>
   )

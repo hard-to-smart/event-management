@@ -14,9 +14,9 @@ const Categories = () => {
     dispatch(viewCategories());
   }, [dispatch]);
 
-  const handleSingleCategory = (title) => {
+  const handleSingleCategory = (title, id) => {
     console.log('clicked');
-    navigate(`${title}`)
+    navigate(`${id}`)
   };
 
   return (
