@@ -89,38 +89,39 @@ const Header = () => {
             )}
           </div>
           <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/category"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
-                  }
-                >
-                  Category
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/contact"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
-                  }
-                >
-                  Contact Us
-                </NavLink>
-              </li>
-            </ul>
+       {!userData?.role || userData.role !== 'admin' ? (
+        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
+              }
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/category"
+              className={({ isActive }) =>
+                `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
+              }
+            >
+              Category
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
+              }
+            >
+              Contact Us
+            </NavLink>
+          </li>
+        </ul>): ''}
           </div>
         </div>
       </nav>
