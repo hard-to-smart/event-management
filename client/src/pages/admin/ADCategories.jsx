@@ -19,11 +19,13 @@ const ADCategories = () => {
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
-    <div className="relative h-screen overflow-scroll p-4 font-poppins">
-      <Categories />
+    <div className="relative w-auto font-poppins">
+      <div className="flex flex-col flex-grow  overflow-y-scroll">
+        <Categories />
+      </div>
       <button
         onClick={handleOpenModal}
-        className="absolute z-10 right-4 bottom-8 bg-purple-600 text-white p-2 rounded"
+        className="absolute z-10 right-10 ring-2 ring-offset-2 ring-[#906766] bottom-20 hover:bg-[#906766] text-white font-semibold p-3 rounded-lg shadow-md transition-all duration-300 ease-in-out transform bg-[#8d7e73] hover:scale-105 active:scale-95"
       >
         Create New Category
       </button>

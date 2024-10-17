@@ -4,7 +4,7 @@ import { viewCategories } from "../../redux/actions/categoryAction";
 import { selectCategoryList } from "../../redux/slices/categorySlice";
 import { addEvent } from "../../redux/actions/eventAction";
 
-const EventForm = ({onClose}) => {
+const EventForm = ({ onClose, handleOpenModal }) => {
   const dispatch = useDispatch();
   const categoryList = useSelector(selectCategoryList);
   const [formData, setFormData] = useState({
@@ -14,7 +14,7 @@ const EventForm = ({onClose}) => {
     date: "",
     time: "",
     location: "",
-    category: "",
+    category: "", 
   });
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const EventForm = ({onClose}) => {
 
   const handleEventSubmit = (e) => {
     e.preventDefault();
-    dispatch(addEvent(formData))
+    dispatch(addEvent(formData));
     onClose();
   };
 
@@ -74,24 +74,24 @@ const EventForm = ({onClose}) => {
               />
             </div>
             <div className="flex">
-            <div className="w-1/2 py-2 text-left">
-              <input
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
-              />
-            </div>
-            <div className="w-1/2 py-2 text-left">
-              <input
-                type="time"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
-              />
-            </div>
+              <div className="w-1/2 py-2 text-left">
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+                />
+              </div>
+              <div className="w-1/2 py-2 text-left">
+                <input
+                  type="time"
+                  name="time"
+                  value={formData.time}
+                  onChange={handleChange}
+                  className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+                />
+              </div>
             </div>
             <div className="py-2 text-left">
               <input
@@ -120,10 +120,10 @@ const EventForm = ({onClose}) => {
               </select>
             </div>
             <div className="py-2">
-              <button
-                type="submit"
-                className="border-2 border-gray-100 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block w-full p-2 rounded-lg focus:border-gray-700 hover:bg-purple-700"
-              >
+            <button
+              type="submit"
+              className="bg-[#A67A59] text-white font-bold tracking-wider block w-full p-2 rounded-lg focus:outline-none hover:bg-[#8c6043] transition duration-300"
+            >
                 Create New Event
               </button>
             </div>

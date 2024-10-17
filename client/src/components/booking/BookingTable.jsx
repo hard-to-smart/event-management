@@ -11,9 +11,9 @@ const BookingTable = () => {
   }, []);
   console.log(bookings, "inside booking");
   return (
-    <div className="relative overflow-x-auto w-full shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
-        <thead className="text-xs text-gray-700 uppercase bg-[#a5514e]">
+    <div className="relative overflow-x-auto w-fit h-fit shadow-md sm:rounded-lg">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 font-semibold ">
+      <thead className="text-xs text-white uppercase bg-[#cdb39c]">
           <tr>
             <th scope="col" className="px-6 py-3">
               User Name

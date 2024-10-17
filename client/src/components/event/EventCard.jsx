@@ -1,21 +1,30 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const EventCard = ({event, handleEventClick}) => {
+const EventCard = ({ event, handleEventClick }) => {
   return (
-    <div className="flex flex-col items-center justify-center w-fit p-2.5 pb-6 bg-white rounded-md shadow-xl"
-    onClick={()=>handleEventClick(event)}>
+    <div
+      className="flex flex-col items-center justify-center w-fit p-4 bg-[#C5B2A3] rounded-lg shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+      onClick={() => handleEventClick(event)}
+    >
       <img
-        className="object-cover w-[300px] h-[300px]" src={event.image}
+        className="object-cover w-[300px] h-[200px] rounded-lg shadow-md mb-4"
+        src={event.image}
+        alt={event.title}
       />
-      <div className="flex flex-row w-full justify-between">
-        <div className="text-2xl text-left my-2">
-          <h3 className="font-semibold">{event.title} </h3>
-          <h3 className="font-semibold">{event.place}</h3>
+      <div className="flex flex-col w-full">
+        <div className="text-left mb-2">
+          <h3 className="text-xl font-bold text-gray-800">{event.title}</h3>
+          <h4 className="text-lg text-gray-600">{event.place}</h4>
         </div>
-        <div className=" bg-purple-200 text-white my-2 font-semibold text-xl text-right px-4 leading-6">
-          <p>{event.date}</p>
-          <p>{event.time}</p>
+
+        <div className="flex flex-col space-y-2">
+          <div className="bg-[#E9D4C2] text-gray-800 rounded-md p-2 flex justify-center transition-colors hover:bg-[#f1f1f1]">
+            <p className="font-semibold text-lg">{event.date}</p>
+          </div>
+
+          <div className="bg-[#D1C4B1] text-gray-800 rounded-md p-2 flex justify-center transition-colors hover:bg-[#f1f1f1]">
+            <p className="font-semibold text-lg">{event.time}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ const Events = () => {
     console.log("clicked");
     navigate(`event/${event._id}`, { state: { event } });
   };
+  
   return (
     <div className="flex flex-wrap gap-4">
       {events && events.eventList ? (
@@ -30,7 +31,7 @@ const Events = () => {
           />
         ))
       ) : (
-        <div className="flex flex-col w-screen justify-center h-[80vh] items-center">
+        <div className="flex flex-col justify-center h-[80vh] items-center">
             <img src={nodata} alt="No data" className="w-64 h-64 opacity-60" />
             <p className="text-xl text-gray-400 mt-4">No events available.</p>
           </div>

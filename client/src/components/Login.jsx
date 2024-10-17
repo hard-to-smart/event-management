@@ -75,7 +75,7 @@ const Login = ({onRegisterClick, onClose}) => {
           <div className="text-center mt-12">
             <span>Don't have an account? </span>
             <button onClick={onRegisterClick}
-              className="font-light text-md text-indigo-600 underline hover:text-indigo-800"
+              className="font-light text-md text-yellow-700 underline hover:text-amber-950"
             >
               Create One
             </button>

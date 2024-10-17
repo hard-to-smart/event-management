@@ -31,7 +31,7 @@ const Header = () => {
       dispatch(logoutUser())
       navigate('/')
     }
-    else dispatch(logoutUser)
+    else dispatch(logoutUser())
   }
   return (
     <header>
