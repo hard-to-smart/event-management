@@ -13,7 +13,7 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10); // keeping salt 10
 
     const user = new User({
       name,
@@ -52,7 +52,6 @@ export const loginUser = async (req, res) => {
     }
 
     const token = generateToken(user);
-    console.log(req.headers);
     res
       .cookie("auth_token", token, {
         httpOnly: false,
@@ -71,3 +70,15 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+export const logoutUser = async (req, res) =>{
+  try{
+    res.clearCookie("auth_token");
+    console.log(res)
+    res.status(201).json({message: 'User logged out successfully'});
+    // else res.status(400).json({message: "Logout Unsuccessful"})
+  } catch(error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error", error });
+  }
+}

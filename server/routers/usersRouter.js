@@ -4,6 +4,6 @@ import { adminMiddleware } from '../middleware/adminMiddleware.js';
 
 const router = express.Router();
 router.get('/view', adminMiddleware, getUsers)
-router.delete('/delete/:id', deleteUser)
+router.delete('/delete/:id', adminMiddleware, deleteUser)
 
 export default router

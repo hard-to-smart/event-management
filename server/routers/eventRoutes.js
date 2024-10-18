@@ -7,5 +7,5 @@ const router = express.Router();
 router.post('/view', viewEvents);
 // admin route
 router.post('/add', adminMiddleware, createEvent);
-router.delete('/delete/:id', deleteEvent);
+router.delete('/delete/:id', adminMiddleware, deleteEvent);
 export default router;

@@ -5,13 +5,12 @@ import { authMiddleware } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// router.post('/create', authMiddleware, createBooking);
-router.post('/create', createBooking);
+router.post('/create', authMiddleware, createBooking);
 
-router.get('/view', viewBookingById);
+router.get('/view', authMiddleware, viewBookingById);
 
 // admin route
-router.get('/view-all' , viewallBookings);
-router.put('/:id', updateBooking);
+router.get('/view-all' , adminMiddleware, viewallBookings);
+router.put('/:id',adminMiddleware, updateBooking);
 
 export default router

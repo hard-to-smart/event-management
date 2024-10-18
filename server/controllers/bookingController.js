@@ -12,11 +12,10 @@ export const createBooking = async (req, res) => {
     const user = await User.findById(userId);
     const event = await Event.findById(eventId);
     if (user && event) {
-      const newBooking = new Booking({
+      const newBooking = await Booking.create({
         event: eventId,
         user: userId,
       });
-      await newBooking.save();
       return res.status(200).json({ message: "Event booked successfully" });
     } else {
       return res.status(400).json({ message: "Event or User does not exist" });
@@ -30,7 +29,9 @@ export const createBooking = async (req, res) => {
 // not tested yet on postman
 export const viewallBookings = async (req, res) => {
   try {
-    const bookings = await Booking.find()
+    const bookings = await Booking.find().populate("user").populate("event");
+    console.log(bookings);
+    // console.log(newBookings,"abc");
     if (!bookings || bookings.length === 0) {
       return res.status(404).json({ message: "No bookings found" });
     }

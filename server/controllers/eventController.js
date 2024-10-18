@@ -1,5 +1,6 @@
 import { Event } from "../models/eventSchema.js";
 import { Category } from "../models/categorySchema.js";
+import { Booking } from "../models/bookingSchema.js";
 
 export const createEvent = async (req, res) => {
   try {
@@ -62,7 +63,9 @@ export const deleteEvent = async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id)
+    // const associatedBooking = await Booking.findMany({event: })
     const deletedEvent = await Event.findByIdAndDelete(id)
+
     if(deletedEvent){
         return res.status(200).json({message: "Event deleted successfully"})
     }

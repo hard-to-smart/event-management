@@ -28,11 +28,10 @@ const eventSchema = new mongoose.Schema(
     },
     image:{
       type:String,
-      default:'https://static.thenounproject.com/png/1077596-200.png',
-
+      default:'https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg',
     }
   },
   { timestamps: true }
 );
 
-export const Event = mongoose.model("event", eventSchema);
+export const Event = mongoose.model("Event", eventSchema);
