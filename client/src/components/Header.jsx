@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Modal from "./modal";
 import Login from "./Login";
-import Register from './Register';
+import Register from "./Register";
 import {
   selectIsAuthenticated,
   selectLoginUser,
@@ -21,15 +21,20 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown
 
-  const handleOpenModal = () => setIsModalOpen(true);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    setIsDropdownOpen(false);
+  }
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setIsRegister(false);
+    setIsDropdownOpen(false)
   };
 
   const handleUserLogout = () => {
     dispatch(logoutUser());
-    navigate('/');
+    navigate("/");
+    setIsDropdownOpen(false)
   };
 
   const toggleDropdown = () => {
@@ -58,7 +63,20 @@ const Header = () => {
             <Modal
               isOpen={isModalOpen}
               onClose={handleCloseModal}
-              element={isRegister ? <Register onRegisterSuccess={() => setIsRegister(false)} setIsRegister={setIsRegister} onClose={handleCloseModal}/> : <Login onRegisterClick={() => setIsRegister(true)} onClose={handleCloseModal} />}
+              element={
+                isRegister ? (
+                  <Register
+                    onRegisterSuccess={() => setIsRegister(false)}
+                    setIsRegister={setIsRegister}
+                    onClose={handleCloseModal}
+                  />
+                ) : (
+                  <Login
+                    onRegisterClick={() => setIsRegister(true)}
+                    onClose={handleCloseModal}
+                  />
+                )
+              }
             />
             {isAuthenticated && userData && (
               <div className="relative">
@@ -66,20 +84,29 @@ const Header = () => {
                   onClick={toggleDropdown}
                   className={`bg-[#C5B2A3] focus:ring-4 focus:ring-red-100 text-[#7A5E48] font-semibold rounded-full text-sm px-2.5 py-2.5 text-center me-2 mb-2`}
                 >
-                  {userData.name.slice(0,2).toUpperCase()}
+                  {userData.name.slice(0, 2).toUpperCase()}
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 mx-0 text-nowrap z-10 bg-white shadow-lg rounded-md mt-2">
                     <NavLink
-                      to="/profile"
+                      to={`${userData.role === 'admin'? '/admin/profile' : 'profile'}`} 
                       className="block px-8 py-2  text-gray-800 hover:bg-gray-200"
-                      onClick={() => setIsDropdownOpen(false)} 
+                      onClick={() => setIsDropdownOpen(false)}
                     >
                       Profile
                     </NavLink>
+                    {userData && userData.role === "user" && (
+                      <NavLink
+                        to="/mybookings"
+                        className="block px-8 py-2  text-gray-800 hover:bg-gray-200"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        My Bookings
+                      </NavLink>
+                    )}
                     <button
                       onClick={handleUserLogout}
-                      className="block  text-left px-8 py-2 text-red-600 hover:bg-red-100"
+                      className="block text-left px-8 py-2 w-full text-red-600 hover:bg-red-100"
                     >
                       Log out
                     </button>
@@ -88,40 +115,52 @@ const Header = () => {
               </div>
             )}
           </div>
-          <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-       {!userData?.role || userData.role !== 'admin' ? (
-        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/category"
-              className={({ isActive }) =>
-                `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
-              }
-            >
-              Category
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${isActive ? "text-[#946f54]" : "text-[#b0aead]"}`
-              }
-            >
-              Contact Us
-            </NavLink>
-          </li>
-        </ul>): ''}
+          <div
+            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+            id="mobile-menu-2"
+          >
+            {!userData?.role || userData.role !== "admin" ? (
+              <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${
+                        isActive ? "text-[#946f54]" : "text-[#b0aead]"
+                      }`
+                    }
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/category"
+                    className={({ isActive }) =>
+                      `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${
+                        isActive ? "text-[#946f54]" : "text-[#b0aead]"
+                      }`
+                    }
+                  >
+                    Category
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/contact"
+                    className={({ isActive }) =>
+                      `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${
+                        isActive ? "text-[#946f54]" : "text-[#b0aead]"
+                      }`
+                    }
+                  >
+                    Contact Us
+                  </NavLink>
+                </li>
+              </ul>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </nav>

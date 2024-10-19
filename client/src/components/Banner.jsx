@@ -47,7 +47,7 @@ const Banner = () => {
           </p>
           <div className="flex justify-center w-1/3 p-4 ">
             <Link
-              to="/product"
+              to="/category"
               className="uppercase bg-white py-3 px-10 text-black hover:scale-105 hover:shadow-lg transition-all duration-300 ease-in-out hover:bg-black hover:text-white"
             >
               Book Now

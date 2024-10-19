@@ -11,6 +11,7 @@ const SingleEventCard = ({event}) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectLoginUser);
   const dispatch = useDispatch();
+  const [day, month, year] = event.date.split(' ');
   return (
     <div className="mx-auto h-screen flex items-center w-full justify-center px-8">
       <div className="flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5">
@@ -22,9 +23,9 @@ const SingleEventCard = ({event}) => {
         ></div>
         <div className="flex flex-col w-full md:flex-row">
           <div className="flex flex-row justify-around p-4 font-bold leading-none text-gray-800 uppercase bg-gray-400 rounded md:flex-col md:items-center md:justify-center md:w-1/4">
-            <div className="md:text-3xl">Jan</div>
-            <div className="md:text-6xl">13</div>
-            <div className="md:text-xl">7 pm</div>
+            <div className="md:text-3xl">{month}</div>
+            <div className="md:text-6xl">{day}</div>
+            <div className="md:text-xl">{event.time}</div>
           </div>
           <div className="p-4 font-normal text-gray-800 md:w-3/4">
             <h2 className="mb-4 text-4xl font-bold leading-none tracking-tight text-gray-800">

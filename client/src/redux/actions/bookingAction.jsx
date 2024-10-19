@@ -20,8 +20,8 @@ export const createBooking = createAsyncThunk(
   }
 );
 
-export const viewBookingById = createAsyncThunk(
-  "booking/viewBookingByUserId",
+export const viewUserBookings = createAsyncThunk(
+  "booking/viewUserBookings",
   async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.get(
@@ -29,7 +29,7 @@ export const viewBookingById = createAsyncThunk(
         { withCredentials: true }
       );
       notify(response?.data?.message, "success");
-      return response.data.bookings;
+      return response.data.bookings
     } catch (error) {
       notify(error.response?.data?.message || "Fetching user bookings failed");
       return rejectWithValue(error.response.data);

@@ -29,24 +29,22 @@ const BookingRow = ({ _id, status, event, user, category }) => {
         </div>
       </td>
       <td className="px-6 py-4 gap-6 " colSpan={2}>
-        <a
-          href="#"
+        <button
           className="font-medium mr-4 text-green-600  hover:underline"
           onClick={() =>
             dispatch(updateBooking({ id: _id, action: "approved" }))
           }
         >
           Accept
-        </a>
-        <a
-          href="#"
+        </button>
+        <button
           className="font-medium text-red-600  hover:underline"
           onClick={() =>
             dispatch(updateBooking({ id: _id, action: "rejected" }))
           }
         >
           Reject
-        </a>
+        </button>
       </td>
     </tr>
   );

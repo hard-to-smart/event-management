@@ -4,15 +4,8 @@ import { Booking } from "../models/bookingSchema.js";
 
 export const createEvent = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      image,
-      date,
-      time,
-      location,
-      category
-    } = req.body;
+    const { title, description, image, date, time, location, category } =
+      req.body;
 
     if (!title || !date || !category || !location || !time) {
       return res.status(400).json({
@@ -35,8 +28,6 @@ export const createEvent = async (req, res) => {
         .json({ message: "Category not found. Provide a valid category" });
     }
 
-    
-
     const event = new Event({
       title,
       description,
@@ -44,14 +35,14 @@ export const createEvent = async (req, res) => {
       date,
       time,
       location,
-      category: validateCategory._id
+      category: validateCategory._id,
     });
 
     await event.save();
 
     return res.status(201).json({
       message: "Event added successfully",
-      event: { id: event._id, title, date, location , image},
+      event: { id: event._id, title, date, location, image },
     });
   } catch (error) {
     console.error(error);
@@ -62,18 +53,20 @@ export const createEvent = async (req, res) => {
 export const deleteEvent = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id)
-    const associatedBooking = await Booking.deleteMany({event: id})
-    const deletedEvent = await Event.findByIdAndDelete(id)
+    console.log(id);
+    const associatedBooking = await Booking.deleteMany({ event: id });
+    const deletedEvent = await Event.findByIdAndDelete(id);
 
-    if(deletedEvent && associatedBooking.deletedCount===0){
-        return res.status(200).json({message: "Event deleted successfully"})
-    }
-    else if(deleteEvent && associatedBooking.deletedCount>0){
-      return res.status(200).json({message: `Event deleted with its ${associatedBooking.deletedCount} associated bookings`})
-    }
-    else{
-        return res.status(400).json({message : "Event not found"})
+    if (deletedEvent && associatedBooking.deletedCount === 0) {
+      return res.status(200).json({ message: "Event deleted successfully" });
+    } else if (deleteEvent && associatedBooking.deletedCount > 0) {
+      return res
+        .status(200)
+        .json({
+          message: `Event deleted with its ${associatedBooking.deletedCount} associated bookings`,
+        });
+    } else {
+      return res.status(400).json({ message: "Event not found" });
     }
   } catch (error) {
     console.error(error);
@@ -83,14 +76,31 @@ export const deleteEvent = async (req, res) => {
 
 export const viewEvents = async (req, res) => {
   try {
-    const { categoryID } = req.body; 
+    const { categoryID } = req.body;
     const events = await Event.find({ category: categoryID });
 
     if (!events || events.length === 0) {
       return res.status(200).json({ message: "No events found" });
-    }
+    } else
+      return res
+        .status(200)
+        .json({ message: "Events displayed successfully", events });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error });
+  }
+};
 
-    else return res.status(200).json({ message: "Events displayed successfully", events });
+export const viewAllEvents = async (req, res) => {
+  try {
+    const events = await Event.find();
+    console.log(events)
+    if (!events || events.length === 0) {
+      return res.status(200).json({ message: "No events found" });
+    } else
+      return res
+        .status(200)
+        .json({ message: "Events displayed successfully", events });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error", error });

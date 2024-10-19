@@ -4,10 +4,24 @@ import {
   selectIsAuthenticated,
   selectLoginUser,
 } from "../../redux/slices/authSlice";
+import { selectUserBookings } from "../../redux/slices/bookingSlice";
 const Profile = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectLoginUser);
-  console.log(isAuthenticated, user);
+  const userBooking = useSelector(selectUserBookings);
+  const bookingCounts = userBooking.reduce(
+    (acc, booking) => {
+      if (booking.status === "registered") {
+        acc.registered += 1;
+      } else if (booking.status === "pending") {
+        acc.pending += 1;
+      } else if (booking.status === "rejected") {
+        acc.rejected += 1;
+      }
+      return acc;
+    },
+    { registered: 0, pending: 0, rejected: 0 }
+  );
   return (
     <>
       <main className="relative profile-page w-full min-h-[70vh]">
@@ -39,10 +53,10 @@ const Profile = () => {
             >
               <div className="px-6">
                 <div className="text-center my-12">
-                  <h3 className="text-4xl font-semibold leading-normal text-gray-700 mb-2">
+                  <h3 className="text-4xl font-semibold leading-normal text-gray-700 mb-2 uppercase">
                     {user.name}
                   </h3>
-                  <div className="text-sm leading-normal mt-0 mb-2 text-gray-600 font-bold uppercase">
+                  <div className="text-sm leading-normal mt-0 mb-2 text-gray-600 font-bold ">
                     Email : {user.email}
                   </div>
                   <div className="mb-2 text-gray-600 mt-2">
@@ -53,26 +67,26 @@ const Profile = () => {
                 {user.role === "user" && (
                   <div className="mt-10 py-10 flex flex-row justify-center border-t border-gray-200 text-center">
                     <div className="mr-4 p-3 text-center">
-                      <span className="text-xl font-bold block uppercase tracking-wide text-gray-600">
-                        0
+                      <span className="text-xl font-bold block uppercase tracking-wide text-green-800 ">
+                      {bookingCounts.registered}
                       </span>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-green-800 font-semibold">
                         Registered Successfully
                       </span>
                     </div>
                     <div className="mr-4 p-3 text-center">
-                      <span className="text-xl font-bold block uppercase tracking-wide text-gray-600">
-                        0
+                      <span className="text-xl font-bold block text-yellow-800  uppercase tracking-wide ">
+                      {bookingCounts.pending}
                       </span>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-yellow-800 font-semibold">
                         Pending Confirmation
                       </span>
                     </div>
                     <div className="lg:mr-4 p-3 text-center">
-                      <span className="text-xl font-bold block uppercase tracking-wide text-gray  -600">
-                        0
+                      <span className="text-xl font-bold text-red-800  block uppercase tracking-wide ">
+                      {bookingCounts.rejected}
                       </span>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-red-800 font-semibold">
                         Registration Rejected
                       </span>
                     </div>

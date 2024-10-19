@@ -19,11 +19,11 @@ const EventCard = ({ event, handleEventClick }) => {
         </div>
 
         <div className="flex flex-col space-y-2">
-          <div className="bg-[#E9D4C2] text-gray-800 rounded-md p-2 flex justify-center transition-colors hover:bg-[#f1f1f1]">
+          <div className="bg-[#E9D4C2] text-gray-800 rounded-md p-2 flex justify-center">
             <p className="font-semibold text-lg">{event.date}</p>
           </div>
 
-          <div className="bg-[#D1C4B1] text-gray-800 rounded-md p-2 flex justify-center transition-colors hover:bg-[#f1f1f1]">
+          <div className="bg-[#f1f1f1] text-gray-800 rounded-md p-2 flex justify-center">
             <p className="font-semibold text-lg">{event.time}</p>
           </div>
         </div>

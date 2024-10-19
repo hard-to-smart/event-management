@@ -46,12 +46,12 @@ export const viewallBookings = async (req, res) => {
   }
 };
 
-export const viewBookingById = async (req, res) => {
+export const viewUserBookings = async (req, res) => {
   try {
-    const bookings = await Booking.findById({ user: req.user._id }).populate({
-      path: "event",
-      select: "title date location time",
-    });
+    console.log("in controller")
+    const { userId } = req.query;
+    console.log(userId)
+    const bookings = await Booking.find({ user: userId }).populate('event')
     if (!bookings || bookings.length === 0) {
       return res.status(404).json({ message: "No bookings found" });
     }

@@ -21,6 +21,22 @@ export const viewEvents = createAsyncThunk(
   }
 );
 
+export const viewAllEvents = createAsyncThunk( "event/viewAllEvents",
+  async(_, {rejectWithValue}) =>{
+    try{
+      const response= await axios.get(`${import.meta.env.VITE_BASE_URL}/api/event/view-all`)
+      console.log(response.data.events);
+      return response.data.events;
+    }
+    catch(error){
+      console.error(error);
+      return rejectWithValue(
+        error.response.data.message || "Unable to fetch events"
+        );
+        }
+    }
+)
+
 export const addEvent = createAsyncThunk(
     '/event/addEvent', async (eventData, {rejectWithValue}) =>{
         try{

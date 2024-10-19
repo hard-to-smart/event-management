@@ -9,7 +9,7 @@ import SingleEvent from "../pages/client/SingleEvent";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import ADBookings from "../pages/admin/ADBookings";
-import ADProfile from "../pages/admin/Profile";
+import ADProfile from "../pages/admin/ADProfile";
 import ADCategories from "../pages/admin/ADCategories";
 import ADSingleEvent from "../pages/admin/SingleEvent";
 import Dashboard from "../pages/admin/Dashboard";
@@ -18,6 +18,8 @@ import ADUsers from "../pages/admin/ADUsers";
 import AdminRoute from "./AdminRoutes";
 import PrivateRoute from "./PrivateRoutes";
 import Loading from "../components/loading/loading"
+import CLBookings from "../pages/client/CLBookings";
+import CLAllEvents from "../pages/client/CLAllEvents";
 const AllRoutes = createBrowserRouter([
   {
     path: "/",
@@ -95,12 +97,21 @@ const AllRoutes = createBrowserRouter([
         ],
       },
       {
+        path:'/events',
+        element: <CLAllEvents/>
+      },
+
+      {
         path: "profile",
         element: <PrivateRoute element={<Profile />}/>,
       },
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: 'mybookings',
+        element:<PrivateRoute element={<CLBookings/>}/>,
       },
       // {
       //   path: "login",

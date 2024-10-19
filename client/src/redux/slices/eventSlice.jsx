@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addEvent, deleteEvent, viewEvents } from "../actions/eventAction";
+import { addEvent, deleteEvent, viewEvents, viewAllEvents } from "../actions/eventAction";
 import { act } from "react";
 
 const eventSlice = createSlice({
   name: 'events',
   initialState: {
     eventList: [],
+    allEvents: [],
     isLoading: false,
     error: null,
   },
@@ -24,6 +25,18 @@ const eventSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+      .addCase(viewAllEvents.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(viewAllEvents.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.allEvents = action.payload;
+      })
+      .addCase(viewAllEvents.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addCase(addEvent.fulfilled, (state, action) => {
         state.eventList.push(action.payload); 
       })
@@ -36,4 +49,5 @@ const eventSlice = createSlice({
 });
 
 export const selectEvents = (state) => state?.events?.eventList || [];
+export const selectAllEvents = (state) => state?.events?.allEvents || [];
 export default eventSlice.reducer;

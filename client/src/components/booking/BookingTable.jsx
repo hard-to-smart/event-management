@@ -9,7 +9,7 @@ const BookingTable = () => {
   const bookings = useSelector((store) => store.booking.allBookings);
   useEffect(() => {
     dispatch(viewAllBookings());
-  }, [dispatch, bookings]); 
+  }, [dispatch, [bookings]]);   
   
   return (
     <div className="relative overflow-x-auto w-fit h-fit shadow-md sm:rounded-lg">

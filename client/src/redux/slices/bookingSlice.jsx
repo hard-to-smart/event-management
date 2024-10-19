@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createBooking, viewAllBookings, viewBookingById , updateBooking} from "../actions/bookingAction";
+import { createBooking, viewAllBookings, viewUserBookings , updateBooking} from "../actions/bookingAction";
 
   const bookingSlice = createSlice({
     name: "booking",
@@ -41,15 +41,15 @@ import { createBooking, viewAllBookings, viewBookingById , updateBooking} from "
         })
   
         // View bookings by user ID
-        .addCase(viewBookingById.pending, (state) => {
+        .addCase(viewUserBookings.pending, (state) => {
           state.isLoading = true;
           state.error = null;
         })
-        .addCase(viewBookingById.fulfilled, (state, action) => {
+        .addCase(viewUserBookings.fulfilled, (state, action) => {
           state.isLoading = false;
           state.userBookings = action.payload;
         })
-        .addCase(viewBookingById.rejected, (state, action) => {
+        .addCase(viewUserBookings.rejected, (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
         })
@@ -78,4 +78,5 @@ import { createBooking, viewAllBookings, viewBookingById , updateBooking} from "
   });
   
 
+export const selectUserBookings = (state) => {return state.booking.userBookings}
 export default bookingSlice.reducer;
