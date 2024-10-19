@@ -6,9 +6,7 @@ import { notify } from "../../utils/toast";
 export const viewEvents = createAsyncThunk(
   "event/viewEvents", 
   async ({ category }, { rejectWithValue }) => {
-    try {
-      console.log(category, "in event action");
-      
+    try {      
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/event/view`, {
         categoryID: category.id 
       });
@@ -42,7 +40,7 @@ export const addEvent = createAsyncThunk(
 
 export const deleteEvent = createAsyncThunk('/event/deleteEvent', async (eventData, {rejectWithValue})=>{
     try{
-        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/event/delete/${eventData}`)
+        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/event/delete/${eventData}`, {withCredentials:true})
         notify(response?.data?.message, 'success')
         return response.data;
     }

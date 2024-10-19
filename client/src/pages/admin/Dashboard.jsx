@@ -5,24 +5,24 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-  const bookings = useSelector(state => state.bookings.allBookings); 
-  const [events, setEvents] = useState([]);
+  // const bookings = useSelector(state => state.bookings.allBookings); 
+  // const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    if (bookings) {
-      const formattedEvents = bookings.map(booking => ({
-        title: booking.event.title, 
-        start: booking.event.date, 
-        end: booking.event.endDate || booking.event.date,
-        id: booking._id, 
-      }));
-      setEvents(formattedEvents);
-    }
-  }, [bookings]);
+  // useEffect(() => {
+  //   if (bookings) {
+  //     const formattedEvents = bookings.map(booking => ({
+  //       title: booking.event.title, 
+  //       start: booking.event.date, 
+  //       end: booking.event.endDate || booking.event.date,
+  //       id: booking._id, 
+  //     }));
+  //     setEvents(formattedEvents);
+  //   }
+  // }, [bookings]);
 
   return (
     <div className="calendar-container">
-      <FullCalendar
+      {/* <FullCalendar
         plugins={[dayGridPlugin]}       // Use dayGridPlugin for month view
         initialView="dayGridMonth"      // Set initial view to month
         events={events}                 // Pass formatted events to the calendar
@@ -36,8 +36,8 @@ const Dashboard = () => {
           minute: '2-digit',
           meridiem: false
         }}
-      />
-    </div>
+      /> */}
+     </div>
   );
 };
 

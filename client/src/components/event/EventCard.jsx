@@ -1,9 +1,10 @@
 import React from "react";
 
 const EventCard = ({ event, handleEventClick }) => {
+  
   return (
     <div
-      className="flex flex-col items-center justify-center w-fit p-4 bg-[#C5B2A3] rounded-lg shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+      className="flex flex-col h-fit m-4 items-center justify-center w-fit p-4 bg-[#C5B2A3] rounded-lg shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
       onClick={() => handleEventClick(event)}
     >
       <img

@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { viewAllBookings } from "../../redux/actions/bookingAction";
 
 const BookingTable = () => {
-  const bookings = useSelector((store) => store.booking.allBookings);
   const dispatch = useDispatch();
+  
+  const bookings = useSelector((store) => store.booking.allBookings);
   useEffect(() => {
     dispatch(viewAllBookings());
-  }, []);
-  console.log(bookings, "inside booking");
+  }, [dispatch, bookings]); 
+  
   return (
     <div className="relative overflow-x-auto w-fit h-fit shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 font-semibold ">
@@ -19,10 +20,13 @@ const BookingTable = () => {
               User Name
             </th>
             <th scope="col" className="px-6 py-3">
-              Category
+              Event Name
             </th>
             <th scope="col" className="px-6 py-3">
-              Event Detail
+              Event Category
+            </th>
+            <th scope="col" className="px-6 py-3">
+             Request Status
             </th>
             <th scope="col" className="px-6 py-3">
               Request Action
@@ -31,7 +35,7 @@ const BookingTable = () => {
         </thead>
         <tbody>
           {bookings &&
-            bookings?.bookings?.map((booking, index) => <BookingRow key={index} booking={booking} />)}
+            bookings?.bookings?.map((booking, index) => <BookingRow key={index} {...booking} />)}
         </tbody>
       </table>
     </div>

@@ -17,7 +17,6 @@ const categorySlice = createSlice({
             })
             .addCase(viewCategories.fulfilled, (state, action) =>{
                 state.isLoading = false,
-                console.log(action.payload, "category slice")
                 state.categoryList = action.payload
             })
             .addCase(viewCategories.rejected, (state, action) =>{
@@ -30,7 +29,6 @@ const categorySlice = createSlice({
             })
             .addCase(addCategory.fulfilled, (state, action) =>{
                 state.isLoading = false,
-                console.log(action.payload, "in category slice")
                 state.categoryList = state.categoryList.push(action.payload)
             })
             .addCase(deleteCategory.fulfilled, (state,action) => {

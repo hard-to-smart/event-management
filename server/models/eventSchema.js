@@ -15,7 +15,7 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
     date: {
-      type: Date,
+      type: String,
       required: [true, "Event date is required"],
     },
     location: {
@@ -28,7 +28,10 @@ const eventSchema = new mongoose.Schema(
     },
     image:{
       type:String,
-      default:'https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg',
+    },
+    price:{
+      type:Number,
+      default:0
     }
   },
   { timestamps: true }

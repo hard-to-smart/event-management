@@ -1,5 +1,6 @@
 import { Category } from "../models/categorySchema.js";
 import { Event } from "../models/eventSchema.js";
+import { Booking } from "../models/bookingSchema.js";
 
 export const createCategory = async (req, res) => {
   try {
@@ -34,12 +35,10 @@ export const deleteCategory = async (req, res) => {
     if (!deleteCategory) {
       return res.status(404).json({ message: "Category not found" });
     }
-
     await Event.deleteMany({category: deleteCategory._id});
-    await Category.deleteOne({
-      _id: deleteCategory._id
-    })
-    return res.status(201).json({ message: "Category and all related events deleted successfully" });
+    await Booking.deleteMany({category: deleteCategory._id });
+    await Category.findByIdAndDelete({_id: deleteCategory._id});
+    return res.status(200).json({ message: "Category and all related events / bookings deleted successfully" });
 
   } catch (error) {
     console.log(error);

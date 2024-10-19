@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { viewCategories } from "../../redux/actions/categoryAction";
 import { selectCategoryList } from "../../redux/slices/categorySlice";
 import { addEvent } from "../../redux/actions/eventAction";
+import { defaultImage, formatDate } from "../../utils/functions";
 
 const EventForm = ({ onClose, handleOpenModal }) => {
   const dispatch = useDispatch();
@@ -14,12 +15,10 @@ const EventForm = ({ onClose, handleOpenModal }) => {
     date: "",
     time: "",
     location: "",
+    price:"",
     category: "", 
   });
 
-  useEffect(() => {
-    dispatch(viewCategories());
-  }, [dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +30,8 @@ const EventForm = ({ onClose, handleOpenModal }) => {
 
   const handleEventSubmit = (e) => {
     e.preventDefault();
-    dispatch(addEvent(formData));
+    const eventData = {...formData, image: formData.image=== '' ? defaultImage() : formData.image,  date: formatDate(formData.date)};
+    dispatch(addEvent(eventData));
     onClose();
   };
 
@@ -101,6 +101,17 @@ const EventForm = ({ onClose, handleOpenModal }) => {
                 onChange={handleChange}
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
                 placeholder="Location"
+              />
+            </div>
+            <div className="py-2 text-left">
+              <input
+                type="number"
+                name="price"
+                min="0"
+                value={formData.price}
+                onChange={handleChange}
+                className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
+                placeholder="Price"
               />
             </div>
             <div className="py-2 text-left">

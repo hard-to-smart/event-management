@@ -25,10 +25,11 @@ export const viewBookingById = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/booking/view?userId=${userId}`
+        `${import.meta.env.VITE_BASE_URL}/api/booking/view?userId=${userId}`,
+        { withCredentials: true }
       );
       notify(response?.data?.message, "success");
-      return response.data;
+      return response.data.bookings;
     } catch (error) {
       notify(error.response?.data?.message || "Fetching user bookings failed");
       return rejectWithValue(error.response.data);
@@ -41,9 +42,9 @@ export const viewAllBookings = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/booking/view-all`, {withCredentials:true}
+        `${import.meta.env.VITE_BASE_URL}/api/booking/view-all`,
+        { withCredentials: true }
       );
-      notify(response?.data?.message, "success");
       return response.data;
     } catch (error) {
       notify(error.response?.data?.message || "Fetching all bookings failed");
@@ -57,7 +58,9 @@ export const updateBooking = createAsyncThunk(
   async ({ id, action }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_BASE_URL}/api/booking/${id}`, {action}
+        `${import.meta.env.VITE_BASE_URL}/api/booking/${id}`,
+        { action },
+        { withCredentials: true }
       );
       notify(response?.data?.message, "success");
       return response.data;

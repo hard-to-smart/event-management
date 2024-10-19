@@ -13,10 +13,9 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch(viewCategories());
-  }, [dispatch]);
+  }, [dispatch, categoryList]);
 
   const handleSingleCategory = (title, id) => {
-    console.log('clicked');
     navigate(`${id}`)
   };
 
@@ -24,15 +23,15 @@ const Categories = () => {
     <div className="min-h-[80vh] overflow-auto py-4 px-2">
       <div className="flex flex-wrap gap-4 justify-between">
         {categoryList.categories && categoryList.categories.length > 0 ? (
-          categoryList.categories.map((singleCategory) => (
+          categoryList.categories.map((singleCategory, index) => (
             <CategoryCard 
-              key={singleCategory.id} 
+              key= {index}
               {...singleCategory} 
               handleCardClick={handleSingleCategory} 
             />
           ))
         ) : (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mx-auto">
             <img src={nodata} alt="No data" className="w-64 h-64 opacity-60" />
             <p className="text-xl text-gray-600 mt-4">No categories available.</p>
           </div>

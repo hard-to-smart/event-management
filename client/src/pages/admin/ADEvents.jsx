@@ -8,7 +8,7 @@ const ADEvents = () => {
     const handleCloseModal = () => setIsModalOpen(false);
   return (
 
-    <div className="relative  font-poppins">
+    <div className="relative min-h-[80vh] justify-center  items-center flex mx-auto font-poppins">
       <div className="flex flex-col flex-grow overflow-y-scroll">
         <Events />
       </div>

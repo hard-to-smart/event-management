@@ -9,7 +9,7 @@ const UserTable = () => {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, [dispatch]);
+  }, [dispatch, users]);
 
   const handleDelete = (userId) => {
     dispatch(deleteUser(userId));

@@ -13,7 +13,7 @@ const Events = () => {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(viewEvents({ category: categoryId }));
-  }, [dispatch]);
+  }, [dispatch, events.eventList]);
 
   const handleEventClick = (event) => {
     console.log("clicked");
@@ -21,17 +21,17 @@ const Events = () => {
   };
   
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-4 mx-auto">
       {events && events.eventList ? (
-        events.eventList.map((event) => (
+        events.eventList.map((event, index) => (
           <EventCard
-            key={event._id}
+            key={index}
             event={event}
             handleEventClick={handleEventClick}
-          />
+          />  
         ))
       ) : (
-        <div className="flex flex-col justify-center h-[80vh] items-center">
+        <div className="flex flex-col  justify-center w-full items-center mx-auto">
             <img src={nodata} alt="No data" className="w-64 h-64 opacity-60" />
             <p className="text-xl text-gray-400 mt-4">No events available.</p>
           </div>

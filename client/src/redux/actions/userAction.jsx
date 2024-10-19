@@ -18,12 +18,11 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async (_,{rejectW
 
 export const deleteUser = createAsyncThunk('users/deleteUser', async (userId, {rejectWithValue}) => {
     try{
-    await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/users/delete/${userId}`); 
+    const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/users/delete/${userId}`, {withCredentials:true}); 
     notify(response?.data?.message, 'success')
-    return response.data; 
+    return userId;
     }
     catch(error){
-      console.log(error);
       notify(error.response?.data?.message || 'Error deleting user');
       return rejectWithValue(
           error.response.data.message || "Error deleting user"

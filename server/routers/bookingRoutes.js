@@ -1,5 +1,5 @@
 import express from 'express'
-import { createBooking, viewBookingById, viewallBookings, approveBooking, rejectBooking, updateBooking } from '../controllers/bookingController.js';
+import { createBooking, viewBookingById, viewallBookings, updateBooking } from '../controllers/bookingController.js';
 import {adminMiddleware} from '../middleware/adminMiddleware.js'
 import { authMiddleware } from '../middleware/authMiddleware.js';
 

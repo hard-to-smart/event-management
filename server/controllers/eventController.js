@@ -63,11 +63,14 @@ export const deleteEvent = async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id)
-    // const associatedBooking = await Booking.findMany({event: })
+    const associatedBooking = await Booking.deleteMany({event: id})
     const deletedEvent = await Event.findByIdAndDelete(id)
 
-    if(deletedEvent){
+    if(deletedEvent && associatedBooking.deletedCount===0){
         return res.status(200).json({message: "Event deleted successfully"})
+    }
+    else if(deleteEvent && associatedBooking.deletedCount>0){
+      return res.status(200).json({message: `Event deleted with its ${associatedBooking.deletedCount} associated bookings`})
     }
     else{
         return res.status(400).json({message : "Event not found"})

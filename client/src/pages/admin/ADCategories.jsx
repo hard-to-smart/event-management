@@ -19,7 +19,7 @@ const ADCategories = () => {
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
-    <div className="relative w-auto font-poppins">
+    <div className="relative w-auto  font-poppins">
       <div className="flex flex-col flex-grow  overflow-y-scroll">
         <Categories />
       </div>
