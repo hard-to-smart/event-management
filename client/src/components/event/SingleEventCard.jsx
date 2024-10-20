@@ -6,19 +6,22 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { createBooking } from "../../redux/actions/bookingAction";
 import { deleteEvent } from "../../redux/actions/eventAction";
+import { notify } from "../../utils/toast";
 
-const SingleEventCard = ({event}) => {
+const SingleEventCard = ({ event }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectLoginUser);
   const dispatch = useDispatch();
-  const [day, month, year] = event.date.split(' ');
+  const currentDate = new Date();
+  const eventDate = new Date(event.date);
+  const [day, month, year] = event.date.split(" ");
   return (
     <div className="mx-auto h-screen flex items-center w-full justify-center px-8">
       <div className="flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5">
         <div
           className="w-full h-64 bg-top bg-cover rounded-t"
           style={{
-            backgroundImage: `url(${event.image })`,
+            backgroundImage: `url(${event.image})`,
           }}
         ></div>
         <div className="flex flex-col w-full md:flex-row">
@@ -39,20 +42,38 @@ const SingleEventCard = ({event}) => {
             </h3>
             <p className="leading-normal">{event.description}</p>
             <div className="flex flex-row items-center mt-4 text-gray-700">
-            
               <div className="flex justify-end">
-
-              {isAuthenticated && (
+                {isAuthenticated && (
                   <>
                     {user && user.role === "user" && (
-                      <button className="bg-gray-400 uppercase hover:bg-red-500 text-gray-600 font-semibold hover:text-black py-2 px-4 border-2 hover:border-transparent mb-2 mr-4"
-                      onClick={()=>dispatch(createBooking({eventId: event._id, userId: user.id}))}>
+                      <button
+                        className={`bg-gray-400 uppercase ${
+                          eventDate >= currentDate
+                            ? "hover:bg-red-500"
+                            : "cursor-not-allowed"
+                        } text-gray-600 font-semibold hover:text-black py-2 px-4 border-2 hover:border-transparent mb-2 mr-4`}
+                        onClick={() => {
+                          if (eventDate >= currentDate) {
+                            dispatch(
+                              createBooking({
+                                eventId: event._id,
+                                userId: user.id,
+                              })
+                            );
+                          } else {
+                            notify("Event bookings closed");
+                          }
+                        }}
+                        disabled={event.date < new Date()}
+                      >
                         RSVP
                       </button>
                     )}
                     {user && user.role === "admin" && (
-                      <button className="bg-gray-400 uppercase hover:bg-red-500 text-gray-600 font-semibold hover:text-black py-2 px-4 border-2 hover:border-transparent mb-2 mr-4"
-                      onClick={()=>dispatch(deleteEvent(event._id))}>
+                      <button
+                        className="bg-gray-400 uppercase hover:bg-red-500 text-gray-600 font-semibold hover:text-black py-2 px-4 border-2 hover:border-transparent mb-2 mr-4"
+                        onClick={() => dispatch(deleteEvent(event._id))}
+                      >
                         Delete
                       </button>
                     )}

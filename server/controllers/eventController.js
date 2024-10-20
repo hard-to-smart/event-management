@@ -39,7 +39,6 @@ export const createEvent = async (req, res) => {
     });
 
     await event.save();
-
     return res.status(201).json({
       message: "Event added successfully",
       event: { id: event._id, title, date, location, image },

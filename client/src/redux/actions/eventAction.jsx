@@ -25,8 +25,7 @@ export const viewAllEvents = createAsyncThunk( "event/viewAllEvents",
   async(_, {rejectWithValue}) =>{
     try{
       const response= await axios.get(`${import.meta.env.VITE_BASE_URL}/api/event/view-all`)
-      console.log(response.data);
-      return response.data
+      return response.data.events
     }
     catch(error){
       console.error(error);

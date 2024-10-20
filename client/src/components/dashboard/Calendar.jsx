@@ -3,13 +3,12 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid'; 
 import { useSelector } from 'react-redux';
 
-const CalendarComponent = () => {
-  const allEvents = useSelector((state) => state.event.allEvents); 
+const CalendarComponent = ({allEvents}) => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     if (allEvents) {
-      const formattedEvents = allEvents?.events?.map((event) => {
+      const formattedEvents = allEvents?.map((event) => {
         const startDate = new Date(event.date).toISOString().slice(0, 10); 
         const endDate = event.endDate ? new Date(event.endDate).toISOString().slice(0, 10) : startDate;
         return {
