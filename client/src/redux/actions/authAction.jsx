@@ -3,6 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { notify } from "../../utils/toast";
 
+
+
 export const loginUser = createAsyncThunk(
   "/auth/loginUser",
   async (userData, { rejectWithValue }) => {

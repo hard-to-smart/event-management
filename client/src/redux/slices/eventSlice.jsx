@@ -1,16 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addEvent, deleteEvent, viewEvents, viewAllEvents } from "../actions/eventAction";
-import { act } from "react";
 
 const eventSlice = createSlice({
   name: 'events',
   initialState: {
     eventList: [],
     allEvents: [],
+    filteredEvents: [],
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    filterBySearch: (state, action) =>{
+      const keyword = action.payload.toLowerCase();
+      console.log(keyword)
+      state.filteredEvents = state.allEvents.filter(event =>
+        event.title.toLowerCase().includes(keyword) ||
+        event.description.toLowerCase().includes(keyword)
+      );
+    },
+    filterByPrice: (state, action) =>{
+      state.filteredEvents = action.payload
+    }
+
+  },
   extraReducers: (builder) => {
     builder
       .addCase(viewEvents.pending, (state) => {
@@ -32,6 +45,7 @@ const eventSlice = createSlice({
       .addCase(viewAllEvents.fulfilled, (state, action) => {
         state.isLoading = false;
         state.allEvents = action.payload;
+        state.filteredEvents = action.payload;
       })
       .addCase(viewAllEvents.rejected, (state, action) => {
         state.isLoading = false;
@@ -48,6 +62,7 @@ const eventSlice = createSlice({
   },
 });
 
+export const { filterBySearch, filterByPrice } = eventSlice.actions;
 export const selectEvents = (state) => state?.events?.eventList || [];
 export const selectAllEvents = (state) => state?.events?.allEvents || [];
 export default eventSlice.reducer;

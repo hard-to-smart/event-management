@@ -31,7 +31,9 @@ const eventSchema = new mongoose.Schema(
     },
     price:{
       type:Number,
-      default:0
+      required:true,
+      min: 0
+
     }
   },
   { timestamps: true }

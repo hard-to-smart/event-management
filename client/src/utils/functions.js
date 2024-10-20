@@ -9,3 +9,7 @@ export const defaultImage = () => {
     return noimage
 }
 
+export const sortByPrice = (products, min, max)=>{
+    return products.filter((product) => product.price >= min && product.price<= max);
+ }
+

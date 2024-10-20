@@ -1,44 +1,37 @@
-import SideNavbar from '../../components/SideNavbar'
-import React, { useEffect, useState } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid'; 
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from '../../redux/actions/userAction';
+import { viewAllBookings } from '../../redux/actions/bookingAction';
+import { viewAllEvents } from '../../redux/actions/eventAction'; // Import event action
+import Table from '../../components/dashboard/Table';
+import Calendar from '../../components/dashboard/Calendar'; // Import CalendarComponent
+import UserTable from '../../components/dashboard/UserTable';
+import BookingTable from '../../components/dashboard/BookingTable';
+import { selectCategoryList } from '../../redux/slices/categorySlice';
+import { viewCategories } from '../../redux/actions/categoryAction';
+import Cards from '../../components/dashboard/Cards';
 
 const Dashboard = () => {
-  // const bookings = useSelector(state => state.bookings.allBookings); 
-  // const [events, setEvents] = useState([]);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (bookings) {
-  //     const formattedEvents = bookings.map(booking => ({
-  //       title: booking.event.title, 
-  //       start: booking.event.date, 
-  //       end: booking.event.endDate || booking.event.date,
-  //       id: booking._id, 
-  //     }));
-  //     setEvents(formattedEvents);
-  //   }
-  // }, [bookings]);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+    dispatch(viewAllBookings());
+    dispatch(viewAllEvents()); 
+    dispatch(viewCategories());
+
+  }, [dispatch]);
 
   return (
-    <div className="calendar-container">
-      {/* <FullCalendar
-        plugins={[dayGridPlugin]}       // Use dayGridPlugin for month view
-        initialView="dayGridMonth"      // Set initial view to month
-        events={events}                 // Pass formatted events to the calendar
-        headerToolbar={{                // Customize the header toolbar
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,dayGridWeek,dayGridDay'
-        }}
-        eventTimeFormat={{              // Customize time display in the calendar
-          hour: '2-digit',
-          minute: '2-digit',
-          meridiem: false
-        }}
-      /> */}
-     </div>
+    <div className="dashboard-container flex">
+      <div className="flex-grow p-4">
+        <h1 className="text-2xl font-semibold mb-4">Admin Dashboard</h1>
+        <Cards/>
+        <Calendar/>
+      </div>
+    </div>
   );
 };
 
-export default Dashboard
+export default Dashboard;

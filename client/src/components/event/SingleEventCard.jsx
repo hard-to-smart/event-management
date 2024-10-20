@@ -34,8 +34,12 @@ const SingleEventCard = ({event}) => {
             <h3 className="mb-4 text-xl font-semibold leading-none tracking-tight text-gray-800">
               {event.location}
             </h3>
+            <h3 className="mb-4 text-lg italic font-medium leading-none tracking-tight text-gray-800">
+              Price: Rs. {event.price}
+            </h3>
             <p className="leading-normal">{event.description}</p>
             <div className="flex flex-row items-center mt-4 text-gray-700">
+            
               <div className="flex justify-end">
 
               {isAuthenticated && (

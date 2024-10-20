@@ -43,13 +43,15 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="bg-[#DDD0C8] border-b-2 border-[#C5B2A3] px-4 lg:px-6 py-3 shadow-xl">
-        <div className="flex font-serif flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <NavLink to="/" className="flex flex-row gap-2 items-center">
-            <img src={logo} className="h-6 sm:h-10" alt="Logo" />
-            <span className="self-center text-2xl text-[#7A5E48] font-semibold whitespace-nowrap">
+      <nav className="bg-[#DDD0C8]  border-b-2 border-[#C5B2A3] px-4 lg:px-6 py-3 shadow-xl">
+        <div className="flex  font-serif flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+          <NavLink to="/" className="flex  flex-row gap-2 items-center">
+          <img src={logo} className="h-[85px] -my-4" alt="Logo" />
+
+            <span className="self-center  text-2xl text-[#7A5E48] font-semibold whitespace-nowrap">
               EVE
             </span>
+
           </NavLink>
           <div className="flex items-center lg:order-2">
             {!isAuthenticated && (
@@ -143,6 +145,18 @@ const Header = () => {
                     }
                   >
                     Category
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/events"
+                    className={({ isActive }) =>
+                      `block py-2 pr-4 pl-3 text-[20px] hover:border-b-2 hover:text-[#946f54] hover:border-b-[#946f54] lg:bg-transparent font-semibold lg:p-0 ${
+                        isActive ? "text-[#946f54]" : "text-[#b0aead]"
+                      }`
+                    }
+                  >
+                    All Events
                   </NavLink>
                 </li>
                 <li>

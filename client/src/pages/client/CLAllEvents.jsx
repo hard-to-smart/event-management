@@ -1,37 +1,37 @@
-import React, { useEffect } from 'react'
-import FilteringComponent from '../../components/filter/filterComponent'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectAllEvents } from '../../redux/slices/eventSlice'
-import { viewAllEvents } from '../../redux/actions/eventAction'
+import React, { useEffect } from "react";
+import FilteringComponent from "../../components/filter/filterComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { viewAllEvents } from "../../redux/actions/eventAction";
+import EventCard from "../../components/event/EventCard";
 
 const CLAllEvents = () => {
-    const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(viewAllEvents())
-    }, [])
-    const allEvents = useSelector(selectAllEvents)
-    console.log(allEvents);
+  const dispatch = useDispatch();
 
+  const filteredEvents = useSelector((store) => store.event.filteredEvents);
+  const allEvents = useSelector((store) => store.event.allEvents);
+  useEffect(() => {
+    dispatch(viewAllEvents());
+  }, [dispatch]);
+
+  console.log(allEvents, "inside all events");
   return (
-    <div>
-        <FilteringComponent/>
-        <div className="event-list">
-                {allEvents.length > 0 ? (
-                    allEvents.map((event) => (
-                        <div key={event.id} className="event-item">
-                            <h3>{event.title}</h3>
-                            <p>{event.description}</p>
-                            <p>Date: {event.date}</p>
-                            <p>Location: {event.location}</p>
-                        </div>
-                    ))
-                ) : (
-                    <p>No events available</p>
-                )}
-            </div>
-        </div>
+    <div className="flex flex-row min-h-[80vh]">
+      <FilteringComponent />
+      <div className="flex flex-wrap overscroll-y-auto">
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event, index) => (
+            <EventCard key={index} event={event} />
+          ))
+        ) : allEvents && allEvents.length > 0 ? (
+          allEvents.map((event, index) => {
+            <EventCard key={index} event={event} />;
+          })
+        ) : (
+          <p>No events found</p>
+        )}
+      </div>
+    </div>
+  );
+};
 
-  )
-}
-
-export default CLAllEvents
+export default CLAllEvents;

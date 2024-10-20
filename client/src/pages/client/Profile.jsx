@@ -4,15 +4,14 @@ import {
   selectIsAuthenticated,
   selectLoginUser,
 } from "../../redux/slices/authSlice";
-import { selectUserBookings } from "../../redux/slices/bookingSlice";
 const Profile = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectLoginUser);
-  const userBooking = useSelector(selectUserBookings);
-  const bookingCounts = userBooking.reduce(
+  const userBooking = useSelector((store)=> store.booking?.userBookings)
+  const bookingCounts = Array.isArray(userBooking) ? userBooking.reduce(
     (acc, booking) => {
-      if (booking.status === "registered") {
-        acc.registered += 1;
+      if (booking.status === "approved") {
+        acc.approved += 1;
       } else if (booking.status === "pending") {
         acc.pending += 1;
       } else if (booking.status === "rejected") {
@@ -20,8 +19,9 @@ const Profile = () => {
       }
       return acc;
     },
-    { registered: 0, pending: 0, rejected: 0 }
-  );
+    { approved: 0, pending: 0, rejected: 0 }
+  ) : { approved: 0, pending: 0, rejected: 0 };
+
   return (
     <>
       <main className="relative profile-page w-full min-h-[70vh]">
@@ -68,7 +68,7 @@ const Profile = () => {
                   <div className="mt-10 py-10 flex flex-row justify-center border-t border-gray-200 text-center">
                     <div className="mr-4 p-3 text-center">
                       <span className="text-xl font-bold block uppercase tracking-wide text-green-800 ">
-                      {bookingCounts.registered}
+                      {bookingCounts.approved}
                       </span>
                       <span className="text-sm text-green-800 font-semibold">
                         Registered Successfully
