@@ -44,7 +44,6 @@ const FilteringComponent = () => {
         {/* slider component to be made here */}
         <SearchBar/>
         <FilterPrice/>
-        <SelectCategory/>
         {/* {filterOptions.map((category) => (
           <AccordionItem
             key={category.name}

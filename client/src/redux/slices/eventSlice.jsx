@@ -1,27 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addEvent, deleteEvent, viewEvents, viewAllEvents } from "../actions/eventAction";
+import {
+  addEvent,
+  deleteEvent,
+  viewEvents,
+  viewAllEvents,
+} from "../actions/eventAction";
 
 const eventSlice = createSlice({
-  name: 'events',
+  name: "events",
   initialState: {
     eventList: [],
     allEvents: [],
     filteredEvents: [],
     isLoading: false,
     error: null,
+    searchKeyword: "",
+    priceRange: { min: 0, max: 50000 },
   },
   reducers: {
-    filterBySearch: (state, action) =>{
+    filterBySearch: (state, action) => {
       const keyword = action.payload.toLowerCase();
-      console.log(keyword)
-      state.filteredEvents = state.allEvents.filter(event =>
-        event.title.toLowerCase().includes(keyword) ||
-        event.description.toLowerCase().includes(keyword)
+      if (!keyword) {
+        state.filteredEvents = [...state.allEvents];
+      } else {
+      state.filteredEvents = state.filteredEvents.filter(
+        (event) =>
+          event.title.toLowerCase().includes(keyword) ||
+          event.description.toLowerCase().includes(keyword)
       );
+      }
     },
-    filterByPrice: (state, action) =>{
-      state.filteredEvents = action.payload
-    }
+    filterByPrice: (state, action) => {
+      const { min, max } = action.payload;
+      if (min === 0 && max === 50000) {
+        state.filteredEvents = [...state.allEvents];
+      } else {
+      state.filteredEvents = state.filteredEvents.filter(
+        (event) => event.price >= min && event.price <= max
+      );
+      }
+    },
 
   },
   extraReducers: (builder) => {
@@ -52,7 +70,7 @@ const eventSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(addEvent.fulfilled, (state, action) => {
-        state.eventList.push(action.payload); 
+        state.eventList.push(action.payload);
       })
       .addCase(deleteEvent.fulfilled, (state, action) => {
         state.eventList = state.eventList.filter(
@@ -62,7 +80,8 @@ const eventSlice = createSlice({
   },
 });
 
-export const { filterBySearch, filterByPrice } = eventSlice.actions;
+export const { filterBySearch, filterByPrice } =
+  eventSlice.actions;
 export const selectEvents = (state) => state?.events?.eventList || [];
 export const selectAllEvents = (state) => state?.events?.allEvents || [];
 export default eventSlice.reducer;

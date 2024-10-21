@@ -2,12 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { selectCategoryList } from '../../redux/slices/categorySlice';
 
-const Cards = () => {
-    const users = useSelector((state) => state.user.users);
-    // const bookings = useSelector((state) => state.booking.allBookings);
-    const allEvents = useSelector((state) => state.event.allEvents);
-    const categories= useSelector((state)=> state.category.categoryList);
-    console.log(categories)
+const Cards = ({users, categories, allEvents}) => {
+    
+
   return (
     <div className="grid grid-cols-3 gap-4 mb-8">
         <div className="bg-[#E8903A] text-white p-4 rounded shadow">
@@ -20,7 +17,7 @@ const Cards = () => {
         </div>
         <div className="bg-orange-500 text-white p-4 rounded shadow">
           <h3 className="text-lg font-semibold">Total Events</h3>
-          <p className="text-2xl">{allEvents?.events?.length || 0}</p>
+          <p className="text-2xl">{allEvents?.length || 0}</p>
         </div>
         {/* <div className="bg-orange-500 text-white p-4 rounded shadow">
           <h3 className="text-lg font-semibold">Total Bookings</h3>
