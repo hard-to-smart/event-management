@@ -8,7 +8,7 @@ export const createCategory = async (req, res) => {
     const exisitingCategory = await Category.findOne({ title });
     if (exisitingCategory) {
       return res
-        .status(400)
+        .status(409)
         .json({ message: "Category with same title exists" });
     }
     const category = new Category({
@@ -49,10 +49,10 @@ export const deleteCategory = async (req, res) => {
 export const viewCategories = async (req, res) => {
   try{
     const categories = await Category.find()
-    if (!categories || categories.length === 0) {
-      return res.status(404).json({ message: "No categories found" });
-    }
-    return res.status(200).json({ message: " Categories displayed successfully", categories});
+    // if (!categories || categories.length === 0) {
+    //   return res.status(404).json({ message: "No categories found" });
+    // }
+    return res.status(200).json({ message: " Categories displayed successfully", categories: categories || []});
   }
   catch(error){
     console.log(error);

@@ -21,7 +21,6 @@ export const createEvent = async (req, res) => {
         .json({ message: "Event with the same title already exists" });
     }
     const validateCategory = await Category.findOne({ title: category });
-    console.log(validateCategory);
     if (!validateCategory) {
       return res
         .status(400)

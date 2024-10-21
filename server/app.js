@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import allRouters from './routers/allRouters.js';
 import cookieParser from "cookie-parser";
 import cors from 'cors';
-import multer from "multer";
 const app = express();
 dotenv.config();
 
