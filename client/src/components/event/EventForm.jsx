@@ -8,6 +8,9 @@ import { defaultImage, formatDate } from "../../utils/functions";
 const EventForm = ({ onClose, handleOpenModal }) => {
   const dispatch = useDispatch();
   const categoryList = useSelector(selectCategoryList);
+  useEffect(()=>{
+    dispatch(viewCategories())
+  }, [])
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -122,9 +125,9 @@ const EventForm = ({ onClose, handleOpenModal }) => {
                 className="bg-gray-200 border-2 border-gray-100 focus:outline-none block w-full py-2 px-4 rounded-lg focus:border-gray-700"
               >
                 <option value="">Select Category</option>
-                {categoryList.categories &&
-                  categoryList.categories.map((category) => (
-                    <option key={category.id} value={category.title}>
+                {categoryList &&
+                  categoryList?.map((category, index) => (
+                    <option key={index} value={category.title}>
                       {category.title}
                     </option>
                   ))}

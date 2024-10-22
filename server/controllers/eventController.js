@@ -4,9 +4,8 @@ import { Booking } from "../models/bookingSchema.js";
 
 export const createEvent = async (req, res) => {
   try {
-    const { title, description, image, date, time, location, category } =
-      req.body;
-
+    console.log(req.body)
+    const { title, description, image, date, time, location, category, price} = req.body
     if (!title || !date || !category || !location || !time) {
       return res.status(400).json({
         message:
@@ -34,13 +33,14 @@ export const createEvent = async (req, res) => {
       date,
       time,
       location,
+      price,
       category: validateCategory._id,
     });
-
+    console.log(event)
     await event.save();
     return res.status(201).json({
       message: "Event added successfully",
-      event: { id: event._id, title, date, location, image },
+      event
     });
   } catch (error) {
     console.error(error);
@@ -57,11 +57,9 @@ export const deleteEvent = async (req, res) => {
     if (deletedEvent && associatedBooking.deletedCount === 0) {
       return res.status(200).json({ message: "Event deleted successfully" });
     } else if (deleteEvent && associatedBooking.deletedCount > 0) {
-      return res
-        .status(200)
-        .json({
-          message: `Event deleted with its ${associatedBooking.deletedCount} associated bookings`,
-        });
+      return res.status(200).json({
+        message: `Event deleted with its ${associatedBooking.deletedCount} associated bookings`,
+      });
     } else {
       return res.status(400).json({ message: "Event not found" });
     }

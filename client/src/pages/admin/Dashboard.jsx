@@ -14,11 +14,8 @@ import Cards from "../../components/dashboard/Cards";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
-  // const bookings = useSelector((state) => state.booking.allBookings);
   const allEvents = useSelector((state) => state.event.allEvents);
-  console.log(allEvents)
   const categories = useSelector((state) => state.category.categoryList);
-
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(viewAllBookings());

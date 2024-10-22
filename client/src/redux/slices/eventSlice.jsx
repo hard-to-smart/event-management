@@ -70,7 +70,8 @@ const eventSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(addEvent.fulfilled, (state, action) => {
-        state.eventList.push(action.payload);
+        state.eventList = [...state.eventList, action.payload]
+        state.allEvents = [...state.allEvents, action.payload]
       })
       .addCase(deleteEvent.fulfilled, (state, action) => {
         state.eventList = state.eventList.filter(
