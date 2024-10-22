@@ -41,7 +41,9 @@ export const addEvent = createAsyncThunk(
         try{
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/event/add`, eventData, {withCredentials:true});
             notify(response?.data?.message, 'success')
-            return response.data;
+            console.log(response.data.event)
+            console.log(response.data)
+            return response.data.event;
         }
         catch(error){
             console.log(error);

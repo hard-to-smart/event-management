@@ -4,6 +4,7 @@ import {
   selectLoginUser,
 } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from 'react-router-dom'
 import { createBooking } from "../../redux/actions/bookingAction";
 import { deleteEvent } from "../../redux/actions/eventAction";
 import { notify } from "../../utils/toast";
@@ -12,9 +13,14 @@ const SingleEventCard = ({ event }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectLoginUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentDate = new Date();
   const eventDate = new Date(event.date);
   const [month, day, year] = event.date.split(" ");
+  const handleDeleteEvent=()=>{
+    dispatch(deleteEvent(event._id))
+    navigate(-1)
+  }
   return (
     <div className="mx-auto h-screen flex items-center w-full justify-center px-8">
       <div className="flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5">
@@ -72,7 +78,7 @@ const SingleEventCard = ({ event }) => {
                     {user && user.role === "admin" && (
                       <button
                         className="bg-gray-400 uppercase hover:bg-red-500 text-gray-600 font-semibold hover:text-black py-2 px-4 border-2 hover:border-transparent mb-2 mr-4"
-                        onClick={() => dispatch(deleteEvent(event._id))}
+                        onClick={handleDeleteEvent}
                       >
                         Delete
                       </button>
