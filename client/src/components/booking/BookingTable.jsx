@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { viewAllBookings } from "../../redux/actions/bookingAction";
 
 const BookingTable = () => {
+  // updating all bookings through view all bookings and displaying on page load
   const dispatch = useDispatch();
+  const bookings = useSelector((store) => store.booking.allBookings);  
   
-  const bookings = useSelector((store) => store.booking.allBookings);
-  useEffect(() => {
+  useEffect(()=>{
     dispatch(viewAllBookings());
-  }, [dispatch, [bookings]]);   
+  }, [])
   
   return (
     <div className="relative overflow-x-auto w-fit h-fit shadow-md sm:rounded-lg">
@@ -34,8 +35,9 @@ const BookingTable = () => {
           </tr>
         </thead>
         <tbody>
+          {/* if bookings present calling in each row and filling the booking data */}
           {bookings &&
-            bookings?.bookings?.map((booking, index) => <BookingRow key={index} {...booking} />)}
+            bookings?.map((booking, index) => <BookingRow key={index} {...booking} />)}
         </tbody>
       </table>
     </div>

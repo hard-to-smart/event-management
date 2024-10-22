@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/actions/authAction";
-import { selectIsAuthenticated, selectLoginUser } from "../redux/slices/authSlice";
-import Modal from '../components/modal';
+import { selectIsAuthenticated } from "../redux/slices/authSlice";
 
 const Login = ({onRegisterClick, onClose}) => {
   const userData = useSelector((store)=>store.auth.user);
-
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const navigate = useNavigate()
   const dispatch = useDispatch();
@@ -22,8 +20,7 @@ const Login = ({onRegisterClick, onClose}) => {
     
   };
 
-  console.log(isAuthenticated)
-  
+  // redirect to admin route if user.role is admin else redirect to user route
   useEffect(() => {
     if (isAuthenticated && userData.role === 'admin') {
       navigate("/admin");
@@ -35,9 +32,9 @@ const Login = ({onRegisterClick, onClose}) => {
     }
   }, [userData, navigate]);
 
-  console.log(userData, "on login page")
 
   return (  
+    // user login
       <div className="flex flex-1 items-center justify-center">
         <div className="rounded-lg sm:border-2 px-4 lg:px-24 py-16 lg:max-w-xl sm:max-w-md w-full text-center">
           <form className="text-center" onSubmit={handleLoginSubmit}>
@@ -69,9 +66,7 @@ const Login = ({onRegisterClick, onClose}) => {
               </button>
             </div>
           </form>
-          {/* <div className="text-center">
-                        <a href="#" className="hover:underline">Forgot password?</a>
-                    </div> */}
+
           <div className="text-center mt-12">
             <span>Don't have an account? </span>
             <button onClick={onRegisterClick}

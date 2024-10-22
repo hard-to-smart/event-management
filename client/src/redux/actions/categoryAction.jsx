@@ -23,7 +23,8 @@ export const addCategory = createAsyncThunk(
         try{
             const response = await axios.post( `${import.meta.env.VITE_BASE_URL}/api/category/add`, categoryData, {withCredentials: true});
             notify(response?.data?.message, 'success')
-            return response.data;
+            console.log(response.data)
+            return response.data.category;
         }
         catch(error){
             console.log(error);

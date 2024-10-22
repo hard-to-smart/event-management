@@ -25,11 +25,13 @@ const categorySlice = createSlice({
             })
             .addCase(addCategory.pending, (state) =>{
                 state.isLoading = true,
+                state.categoryList = 
                 state.error = null
             })
             .addCase(addCategory.fulfilled, (state, action) =>{
                 state.isLoading = false,
-                state.categoryList = state.categoryList.push(action.payload)
+                console.log(action.payload, "in category slice")
+                state.categoryList = [...state.categoryList, action.payload]
             })
             .addCase(deleteCategory.fulfilled, (state,action) => {
                 state.isLoading = false,

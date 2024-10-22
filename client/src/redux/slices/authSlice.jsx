@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, logoutUser, registerUser } from "../actions/authAction";
-
+// saving auth state in local storage
 const setUserInLs = (state) => {
   localStorage.setItem("userAuth", JSON.stringify(state));
 };
+// getting auth state in local storage
 const getUserFromLS = () => {
   const storedState = localStorage.getItem("userAuth");
   if (storedState) {
@@ -29,7 +30,7 @@ export const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user= action.payload
         state.isAuthenticated = true;
         setUserInLs(state)
 
@@ -49,7 +50,7 @@ export const authSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user = action.payload
         setUserInLs(state);
       })
       .addCase(registerUser.rejected, (state, action) => {

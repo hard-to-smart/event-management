@@ -51,7 +51,6 @@ export const createEvent = async (req, res) => {
 export const deleteEvent = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);
     const associatedBooking = await Booking.deleteMany({ event: id });
     const deletedEvent = await Event.findByIdAndDelete(id);
 
@@ -92,7 +91,6 @@ export const viewEvents = async (req, res) => {
 export const viewAllEvents = async (req, res) => {
   try {
     const events = await Event.find();
-    console.log(events)
     if (!events || events.length === 0) {
       return res.status(200).json({ message: "No events found" });
     } else

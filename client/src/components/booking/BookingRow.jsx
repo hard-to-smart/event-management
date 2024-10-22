@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateBooking,
-  viewAllBookings,
-} from "../../redux/actions/bookingAction";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { updateBooking } from "../../redux/actions/bookingAction";
 
 const BookingRow = ({ _id, status, event, user, category }) => {
+  // passing the updatebooking payload through dispatch and updating page on change of status
   const dispatch = useDispatch();
-  useEffect(() => {}, status);
+
   return (
     <tr className="bg-[#fff5f0] border-b hover:bg-[#f9e8df] transition-all duration-300">
-      {" "}
       <td
         scope="row"
         className="flex items-center px-6 py-4 text-gray-700 whitespace-nowrap "
@@ -24,7 +21,7 @@ const BookingRow = ({ _id, status, event, user, category }) => {
       <td className="px-6 py-4">{category.title}</td>
       <td className="px-6 py-4">
         <div className="flex items-center">
-          <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+          <div className={`h-2.5 w-2.5 rounded-full me-2 ${status === 'pending' ? 'bg-yellow-400' : status === "rejected" ? 'bg-red-500': 'bg-green-500'} ` }></div>
           {status}
         </div>
       </td>

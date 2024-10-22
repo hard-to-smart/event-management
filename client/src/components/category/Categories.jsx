@@ -10,19 +10,18 @@ const Categories = () => {
   const categoryList = useSelector(selectCategoryList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  // display all category list on page reload. 
   useEffect(() => {
     dispatch(viewCategories());
-  }, [dispatch, categoryList]);
-
-  const handleSingleCategory = (title, id) => {
+  }, []);
+  const handleSingleCategory = (id) => {
     navigate(`${id}`)
   };
 
   return (
     <div className="min-h-[80vh] overflow-auto py-4 px-2">
       <div className="flex flex-wrap gap-4 justify-between">
-        {categoryList.categories && categoryList.categories.length > 0 ? (
+        {categoryList.categories && categoryList?.categories?.length > 0 ? (
           categoryList.categories.map((singleCategory, index) => (
             <CategoryCard 
               key= {index}

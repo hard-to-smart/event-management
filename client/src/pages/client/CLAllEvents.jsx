@@ -23,12 +23,12 @@ const CLAllEvents = () => {
     <div className="flex flex-row min-h-[80vh]">
       <FilteringComponent />
       <div className="flex flex-wrap overscroll-y-auto">
-        {filteredEvents.length > 0 ? (
-          filteredEvents.map((event, index) => (
+        {filteredEvents && filteredEvents.length > 0 ? (
+          filteredEvents?.map((event, index) => (
             <EventCard key={index} event={event} handleEventClick={handleEventClick} />
           ))
         ) : allEvents && allEvents.length > 0 ? (
-          allEvents.map((event, index) => {
+          allEvents?.map((event, index) => {
             <EventCard key={index} event={event} handleEventClick={handleEventClick}/>;
           })
         ) : (

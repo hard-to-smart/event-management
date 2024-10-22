@@ -14,7 +14,7 @@ const SingleEventCard = ({ event }) => {
   const dispatch = useDispatch();
   const currentDate = new Date();
   const eventDate = new Date(event.date);
-  const [day, month, year] = event.date.split(" ");
+  const [month, day, year] = event.date.split(" ");
   return (
     <div className="mx-auto h-screen flex items-center w-full justify-center px-8">
       <div className="flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5">

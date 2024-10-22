@@ -2,6 +2,7 @@
 import React from "react";
 
 const UserRow = ({ user, handleDelete }) => {
+  // handle delete passed from user table to delete user
   return (
     <tr className="bg-[#fff5f0] border-b hover:bg-[#f9e8df] transition-all duration-300">
       <td className="px-6 py-4 text-gray-800">{user.name}</td>

@@ -13,7 +13,7 @@ const Events = () => {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(viewEvents({ category: categoryId }));
-  }, [dispatch, events.eventList]);
+  }, []);
 
   const handleEventClick = (event) => {
     console.log("clicked");

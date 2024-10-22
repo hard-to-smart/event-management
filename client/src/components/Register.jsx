@@ -1,9 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { registerUser } from "../redux/actions/authAction";
 
 const Register = ({onRegisterSuccess, onClose, setIsRegister}) => {
+
+  // sending user payload to action
   const dispatch = useDispatch()
   const handleRegisterSubmit= (e)=>{
     e.preventDefault()
@@ -65,9 +66,7 @@ const Register = ({onRegisterSuccess, onClose, setIsRegister}) => {
               </button>
             </div>
           </form>
-          {/* <div className="text-center">
-                        <a href="#" className="hover:underline">Forgot password?</a>
-                    </div> */}
+          {/* register if already signed in */}
           <div className="text-center mt-12">
             <span>Already have an account?</span>
             <button onClick={()=> setIsRegister((prev)=> !prev)}

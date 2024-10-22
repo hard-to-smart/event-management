@@ -11,20 +11,21 @@ export const getUsers = async (req, res) => {
     return res.status(400).json({ message: "Server Error", error });
   }
 };
-
+// delete a user and its associated bookings
 export const deleteUser = async (req, res) => {
     try {
       const id = req.params.id;
       const associatedBooking = await Booking.deleteMany({user: id})
       const deletedUser = await User.findByIdAndDelete(id);
-      
+      console.log(deletedUser)
       if (deletedUser && associatedBooking.deletedCount > 0) {
         return res.status(200).json({
-          message: `User deleted successfully with ${associatedBooking.deletedCount} associated bookings`
+          message: `User deleted successfully with ${associatedBooking.deletedCount} associated bookings`,
         });
       } else if (deletedUser && associatedBooking.deletedCount === 0) {
         return res.status(200).json({
-          message: "User deleted successfully"
+          message: "User deleted successfully", 
+
         });
       } else {
         return res.status(404).json({ message: "User not found" });

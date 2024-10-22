@@ -1,9 +1,9 @@
 import React from 'react'
 import Categories from '../../components/category/Categories'
-import FilteringComponent from '../../components/filter/filterComponent'
 
 const CLCategories = () => {
   return (
+    //  displaying categories list
     <Categories/>
   )
 }

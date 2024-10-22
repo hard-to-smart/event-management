@@ -12,7 +12,7 @@ export const createBooking = createAsyncThunk(
         { withCredentials: true }
       );
       notify(response?.data?.message, "success");
-      return response.data;
+      return response.data.booking;
     } catch (error) {
       notify(error.response?.data?.message || "Adding booking failed");
       return rejectWithValue(error.response.data);
@@ -63,7 +63,7 @@ export const updateBooking = createAsyncThunk(
         { withCredentials: true }
       );
       notify(response?.data?.message, "success");
-      return response.data;
+      return response.data.booking;
     } catch (error) {
       notify(error.response?.data?.message || "Failed to change action status");
       return rejectWithValue(error.response.data);

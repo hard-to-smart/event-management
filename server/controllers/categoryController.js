@@ -4,7 +4,7 @@ import { Booking } from "../models/bookingSchema.js";
 
 export const createCategory = async (req, res) => {
   try {
-    const { title, description, image} = req.body;
+    const { title, description, image } = req.body;
     const exisitingCategory = await Category.findOne({ title });
     if (exisitingCategory) {
       return res
@@ -14,13 +14,13 @@ export const createCategory = async (req, res) => {
     const category = new Category({
       title,
       description,
-      image
+      image,
     });
 
     await category.save();
     return res.status(201).json({
       message: "Category added successfully",
-      category: { id: category._id, title, description, image},
+      category,
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
@@ -35,11 +35,15 @@ export const deleteCategory = async (req, res) => {
     if (!deleteCategory) {
       return res.status(404).json({ message: "Category not found" });
     }
-    await Event.deleteMany({category: deleteCategory._id});
-    await Booking.deleteMany({category: deleteCategory._id });
-    await Category.findByIdAndDelete({_id: deleteCategory._id});
-    return res.status(200).json({ message: "Category and all related events / bookings deleted successfully" });
-
+    await Event.deleteMany({ category: deleteCategory._id });
+    await Booking.deleteMany({ category: deleteCategory._id });
+    await Category.findByIdAndDelete({ _id: deleteCategory._id });
+    return res
+      .status(200)
+      .json({
+        message:
+          "Category and all related events / bookings deleted successfully",
+      });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error", error });
@@ -47,15 +51,19 @@ export const deleteCategory = async (req, res) => {
 };
 
 export const viewCategories = async (req, res) => {
-  try{
-    const categories = await Category.find()
+  try {
+    const categories = await Category.find();
     // if (!categories || categories.length === 0) {
     //   return res.status(404).json({ message: "No categories found" });
     // }
-    return res.status(200).json({ message: " Categories displayed successfully", categories: categories || []});
-  }
-  catch(error){
+    return res
+      .status(200)
+      .json({
+        message: " Categories displayed successfully",
+        categories: categories || [],
+      });
+  } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error", error });
   }
-}
+};

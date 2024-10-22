@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, fetchUsers } from "../../redux/actions/userAction";
 
 const UserTable = () => {
+  // fetching users from the store and displaying them on page reload
   const { users } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, [dispatch, users]);
+  }, []);
 
   const handleDelete = (userId) => {
     dispatch(deleteUser(userId));
@@ -38,6 +39,7 @@ const UserTable = () => {
           </tr>
         </thead>
         <tbody>
+          {/* mapping the users in rows */}
           {users &&
             users?.map((user) => (
               <UserRow key={user._id} user={user} handleDelete={handleDelete} />

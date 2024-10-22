@@ -1,7 +1,7 @@
 import { User } from "../models/userSchema.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
-
+// add user
 export const registerUser = async (req, res) => {
   try {
     const { name, email, phone, role, password } = req.body;
@@ -34,7 +34,7 @@ export const registerUser = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
-
+// login user
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -71,10 +71,10 @@ export const loginUser = async (req, res) => {
   }
 };
 
+// logout user
 export const logoutUser = async (req, res) =>{
   try{
     res.clearCookie("auth_token");
-    console.log(res)
     res.status(200).json({message: 'User logged out successfully'});
   } catch(error) {
     console.log(error);
