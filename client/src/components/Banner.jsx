@@ -20,9 +20,9 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[70vh]  flex items-start">
+    <div className="relative w-full min-h-[80vh]  flex items-start">
       {/* Banner container */}
-      <div className="w-full h-[70vh]">
+      <div className="w-full h-[80vh]">
         {/* current image */}
         <img
           className="w-full h-full object-fill"

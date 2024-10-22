@@ -16,13 +16,13 @@ const SingleEventCard = ({ event }) => {
   const navigate = useNavigate();
   const currentDate = new Date();
   const eventDate = new Date(event.date);
-  const [month, day, year] = event.date.split(" ");
+  const [day, month, year] = event.date.split(" ");
   const handleDeleteEvent=()=>{
     dispatch(deleteEvent(event._id))
     navigate(-1)
   }
   return (
-    <div className="mx-auto h-screen flex items-center w-full justify-center px-8">
+    <div className="mx-auto min-h-[80vh] flex items-center w-full justify-center px-8">
       <div className="flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5">
         <div
           className="w-full h-64 bg-top bg-cover rounded-t"
@@ -31,9 +31,9 @@ const SingleEventCard = ({ event }) => {
           }}
         ></div>
         <div className="flex flex-col w-full md:flex-row">
-          <div className="flex flex-row justify-around p-4 font-bold leading-none text-gray-800 uppercase bg-gray-400 rounded md:flex-col md:items-center md:justify-center md:w-1/4">
-            <div className="md:text-3xl">{month}</div>
-            <div className="md:text-6xl">{day}</div>
+          <div className="flex flex-row justify-around p-4 font-bold leading-none text-gray-800 uppercase bg-[#9a9ce3] rounded md:flex-col md:items-center md:justify-center md:w-1/4">
+            <div className="md:text-3xl">{day}</div>
+            <div className="md:text-6xl">{month.slice(0,3)}</div>
             <div className="md:text-xl">{event.time}</div>
           </div>
           <div className="p-4 font-normal text-gray-800 md:w-3/4">

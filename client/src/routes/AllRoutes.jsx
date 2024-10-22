@@ -6,8 +6,6 @@ import Profile from "../pages/client/Profile";
 import Categories from "../pages/client/CLCategories";
 import SingleCategory from "../pages/client/CLEvents";
 import SingleEvent from "../pages/client/SingleEvent";
-import Login from "../components/Login";
-import Register from "../components/Register";
 import ADBookings from "../pages/admin/ADBookings";
 import ADProfile from "../pages/admin/ADProfile";
 import ADCategories from "../pages/admin/ADCategories";
@@ -113,14 +111,6 @@ const AllRoutes = createBrowserRouter([
         path: 'mybookings',
         element:<PrivateRoute element={<CLBookings/>}/>,
       },
-      // {
-      //   path: "login",
-      //   element: <Login />,
-      // },
-      // {
-      //   path: "register",
-      //   element: <Register />,
-      // },
       {
         path: '*',
         element: <div>NOT FOUND</div>

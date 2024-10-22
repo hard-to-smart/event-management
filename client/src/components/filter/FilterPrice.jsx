@@ -5,7 +5,7 @@ import { filterByPrice } from "../../redux/slices/eventSlice";
 const FilterPrice = () => { 
     const dispatch = useDispatch();
     const [startRange, setStartRange] = useState(0);
-    const [endRange, setEndRange] = useState(50000);
+    const [endRange, setEndRange] = useState(25000);
 
     const handleStartRange = (e) => {
         setStartRange(Number(e.target.value)); 
@@ -50,7 +50,7 @@ const FilterPrice = () => {
                     type="range"
                     className="absolute bg-amber-950 text-blue-500 w-1/2 h-1 top-0 appearance-none z-10 cursor-pointer"
                     min="0"
-                    max="25000" 
+                    max="22500" 
                     value={startRange}
                     step="100"
                     onChange={handleStartRange}
@@ -58,8 +58,8 @@ const FilterPrice = () => {
                 <input
                     type="range"
                     className="absolute w-1/2 right-0 bg-amber-950 text-blue-500 h-1 top-0 appearance-none cursor-pointer"
-                    min="25000"
-                    max="50000"
+                    min="22500"
+                    max="25000"
                     value={endRange}
                     step="100"
                     onChange={handleEndRange}

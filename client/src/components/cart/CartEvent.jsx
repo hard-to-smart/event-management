@@ -1,7 +1,6 @@
 import React from "react";
 
 const CartEvent = ({ cartItem }) => {
-  console.log(cartItem);
   return (
     <div className="flex justify-between border-b-2 pb-5 border-gray-300 mt-5 ">
       <div className="w-[65%]">
@@ -26,7 +25,6 @@ const CartEvent = ({ cartItem }) => {
             </p>
           </div>
           
-          {/* total prize display for particular item */}
           
         </div>
       </div>

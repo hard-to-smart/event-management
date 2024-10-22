@@ -1,14 +1,14 @@
 import React from "react";
 import logo from '../assets/logo.png'
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectLoginUser } from "../redux/slices/authSlice";
 const Footer = () => {
   const userData = useSelector(selectLoginUser);
 
   return (
-    <footer className="bg-gradient-to-b from-[#4A4A4A] to-[#1F1F1F] font-serif shadow-inner">
-      <div className="w-full max-w-screen-xl mx-auto px-4 md:py-8">
+    <footer className=" bg-gradient-to-b from-[#9c9c9c] to-[#362525] font-serif ">
+      <div className="w-full max-w-screen-xl mx-auto px-4 py-4">
         <div className="sm:flex sm:items-center sm:justify-between">
         {!userData?.role || userData.role !== 'admin' ? (
           <div className="flex w-full justify-between z-10">
@@ -23,7 +23,7 @@ const Footer = () => {
             <span className="self-center text-xl text-white font-semibold whitespace-nowrap"> EVE</span> 
           </Link>
 
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 cursor-pointer">
+          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-300 sm:mb-0 cursor-pointer">
             <li>
               <Link to='/' className="hover:underline me-4 md:me-6">
                 Home

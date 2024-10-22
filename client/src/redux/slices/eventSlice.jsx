@@ -40,6 +40,16 @@ const eventSlice = createSlice({
       );
       }
     },
+    sortByDate: (state) => {
+      state.filteredEvents = state.filteredEvents.slice().sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+    },
+    sortByPrice: (state) => {
+      state.filteredEvents = state.filteredEvents.slice().sort((a, b) => {
+        return a.price - b.price;
+      });
+    },
 
   },
   extraReducers: (builder) => {
@@ -81,7 +91,7 @@ const eventSlice = createSlice({
   },
 });
 
-export const { filterBySearch, filterByPrice } =
+export const { filterBySearch, filterByPrice , sortByDate, sortByPrice} =
   eventSlice.actions;
 export const selectEvents = (state) => state?.events?.eventList || [];
 export const selectAllEvents = (state) => state?.events?.allEvents || [];

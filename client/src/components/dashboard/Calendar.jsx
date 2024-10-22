@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid'; 
-import { useSelector } from 'react-redux';
 
-const CalendarComponent = ({allEvents}) => {
+const CalendarComponent = ({ allEvents }) => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -23,13 +22,13 @@ const CalendarComponent = ({allEvents}) => {
   }, [allEvents]);
 
   return (
-    <div className="calendar-container ">
+    <div className="calendar-container p-4">
       <h2 className="text-xl font-semibold mb-2">Events Calendar</h2>
       <FullCalendar
         plugins={[dayGridPlugin]} 
         initialView="dayGridMonth"
         events={events} 
-        className="inset-0"
+        height='40em'
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',

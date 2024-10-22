@@ -18,8 +18,8 @@ const Categories = () => {
   };
 
   return (
-    <div className="min-h-[80vh] overflow-auto py-4 px-2">
-      <div className="flex flex-wrap gap-4 justify-between">
+    <div className="min-h-[80vh]  overflow-y-scroll mb-2 py-4 px-2">
+      <div className="flex flex-wrap gap-4 justify-evenly">
         {categoryList && categoryList?.length > 0 ? (
           categoryList.map((singleCategory, index) => (
             <CategoryCard 

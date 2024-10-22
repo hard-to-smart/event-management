@@ -52,7 +52,7 @@ const bookingSlice = createSlice({
       })
       .addCase(viewUserBookings.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.userBookings = action.payload.bookings;
+        state.userBookings = action.payload;
       })
       .addCase(viewUserBookings.rejected, (state, action) => {
         state.isLoading = false;

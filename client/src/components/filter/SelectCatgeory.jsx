@@ -8,10 +8,9 @@ const SelectCategory = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(viewCategories());
-  //   dispatch(filterByCategory(selectedCategories));
-  // }, [dispatch, selectedCategories]);
+  useEffect(() => {
+    dispatch(viewCategories());
+  }, []);
 
   const categories = useSelector((store) => store.category.categoryList);
 
