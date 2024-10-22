@@ -7,7 +7,7 @@ export const viewCategories = createAsyncThunk(
   async (_,{rejectWithValue }) => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/category/view`);
-      return response.data;
+      return response.data.categories;
     } catch (error) {
       console.log(error);
       notify(error.response?.data?.message || 'Unable to fetch categories');
@@ -40,7 +40,7 @@ export const deleteCategory = createAsyncThunk('/category/deletecategory', async
     try{
         const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/category/delete/${categoryId}`, {withCredentials: true})
         notify(response?.data?.message, 'success')
-        return response.data;
+        return categoryId;
     }
     catch(error){
         console.log(error);

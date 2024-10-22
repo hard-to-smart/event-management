@@ -25,7 +25,6 @@ const categorySlice = createSlice({
             })
             .addCase(addCategory.pending, (state) =>{
                 state.isLoading = true,
-                state.categoryList = 
                 state.error = null
             })
             .addCase(addCategory.fulfilled, (state, action) =>{
@@ -35,7 +34,7 @@ const categorySlice = createSlice({
             })
             .addCase(deleteCategory.fulfilled, (state,action) => {
                 state.isLoading = false,
-                state.categoryList = state.categoryList.filter((category)=> {return category.id !== action.payload})
+                state.categoryList = state.categoryList.filter((category)=> {return category._id !== action.payload})
             })
     }
 })

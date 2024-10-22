@@ -25,7 +25,7 @@ const CategoryCard = ({ title, description, image, _id, handleCardClick }) => {
       </style>
       <div
         onClick={() => {
-          handleCardClick(title, _id);
+          handleCardClick( _id);
         }}
         className="relative flex flex-col border-[16px] hover:border-0 border-white justify-end shadow-3xl bg-cover bg-center sm:w-[350px] h-[300px] text-gray-800 overflow-hidden cursor-pointer transition-transform transform hover:scale-105 duration-300"
         style={{
