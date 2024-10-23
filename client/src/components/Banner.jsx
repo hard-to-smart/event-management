@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import {carouselImages } from "../utils/banner";
+import { carouselImages } from "../utils/banner";
 import { Link } from "react-router-dom";
+import Loading from "./loading/Loading";
+import { useIsLoading } from "./loading/LoadingHook";
 
 const Banner = () => {
   // index tracker for current image
@@ -19,7 +21,11 @@ const Banner = () => {
     };
   }, []);
 
-  return (
+  const isLoading = useIsLoading();
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="relative w-full min-h-[80vh]  flex items-start">
       {/* Banner container */}
       <div className="w-full h-[80vh]">
@@ -31,14 +37,12 @@ const Banner = () => {
       </div>
       {/* banner text overlay */}
       <div className="absolute w-1/2 text-white  top-8 right-10  flex  flex-col items-end  h-[80vh] ">
-
         <div className="p-2 flex flex-col items-end ">
           <p className="text-[4rem] tracking-widest">
             {carouselImages[currentIndex].tagline}
           </p>
         </div>
         <div className="p-2  w-28 border-b-2 border-white "></div>
-
       </div>
       <div className="absolute w-1/2 bottom-28 right-10 flex flex-col items-end ">
         <div className="text-white  p-4 flex flex-col items-end w-full">

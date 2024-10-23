@@ -1,8 +1,14 @@
 import React from 'react';
 import { FiPhoneCall, FiMail, FiMapPin } from 'react-icons/fi';
+import Loading from '../../components/loading/Loading';
+import { useIsLoading } from '../../components/loading/LoadingHook';
 
 const Contact = () => {
-  return (
+  const isLoading= useIsLoading();
+
+  return isLoading ? (
+    <Loading />
+  ) :(
     <section className="py-4 mx-auto h-auto min-h-[80vh]">
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
@@ -25,12 +31,12 @@ const Contact = () => {
                     </a>
                     <a href="mailto:Pagedone1234@gmail.com" className="flex items-center mb-6">
                       <FiMail size={30} className="text-[#874E4C]" />
-                      <h5 className="text-black text-base font-normal ml-5">Pagedone1234@gmail.com</h5>
+                      <h5 className="text-black text-base font-normal ml-5">Page1234@gmail.com</h5>
                     </a>
                     <a href="https://goo.gl/maps/location" className="flex items-center">
                       <FiMapPin size={30} className="text-[#874E4C]" />
                       <h5 className="text-black text-base font-normal ml-5">
-                        654 Sycamore Ave, Meadowville, WA
+                        654 Abc Colony, xyz, IN
                       </h5>
                     </a>
                   </div>

@@ -15,9 +15,9 @@ import ADEvents from "../pages/admin/ADEvents";
 import ADUsers from "../pages/admin/ADUsers";
 import AdminRoute from "./AdminRoutes";
 import PrivateRoute from "./PrivateRoutes";
-import Loading from "../components/loading/loading"
 import CLBookings from "../pages/client/CLBookings";
 import CLAllEvents from "../pages/client/CLAllEvents";
+import Loading from "../components/loading/Loading";
 const AllRoutes = createBrowserRouter([
   {
     path: "/",

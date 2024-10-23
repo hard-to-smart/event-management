@@ -1,8 +1,13 @@
 import React from "react";
+import Loading from "../loading/Loading";
+import { useIsLoading } from "../loading/LoadingHook";
 
 const CartEvent = ({ cartItem }) => {
-  return (
-    <div className="flex justify-between border-b-2 pb-5 border-gray-300 mt-5 ">
+  const isLoading= useIsLoading();
+
+  return isLoading ? (
+    <Loading />
+  ) :(    <div className="flex justify-between border-b-2 pb-5 border-gray-300 mt-5 ">
       <div className="w-[65%]">
         <img src={cartItem.event?.image} />
       </div>

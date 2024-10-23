@@ -1,17 +1,29 @@
 .loader {
-    width: 80px;
-    aspect-ratio: 1;
-    border: 10px solid #000;
-    box-sizing: border-box;
-    background: 
-      radial-gradient(farthest-side at right,#fff 98%,#0000) 20% 50%/40% 80%,
-      radial-gradient(farthest-side at left ,#fff 98%,#0000) 80% 50%/40% 80%,
-      #000;
-    background-repeat: no-repeat;
-    filter: blur(4px) contrast(10); 
-    animation: l18 0.8s infinite alternate;
-  }
-  @keyframes l18 {
-    0%,20% {background-position:20% 50%,80% 50%}
-    100%   {background-position:80% 50%,20% 50%}
-  }
+  width: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  position: absolute;
+  background: #fff;
+  border-radius: 4px;
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 24px;
+  height: 24px;
+  background: darksalmon;
+  border-radius: 50%;
+  transform-origin: 100% 100%;
+  animation: move 1s linear infinite;
+}
+@keyframes move {
+    0% , 100%{ transform: translate(0 ,0)}
+    25%{ transform: translate(100% ,0)}
+    50%{ transform: translate(100% ,100%)}
+    75%{ transform: translate(0 ,100%)}
+}
+      

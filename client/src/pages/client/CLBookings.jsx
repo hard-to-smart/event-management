@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserBookings } from "../../redux/slices/bookingSlice";
 import { viewUserBookings } from "../../redux/actions/bookingAction";
 import { selectLoginUser } from "../../redux/slices/authSlice";
+import Loading from "../../components/loading/Loading";
+import { useIsLoading } from "../../components/loading/LoadingHook";
 
 const CLBookings = () => {
   const userBookings = useSelector(selectUserBookings);
@@ -13,7 +15,12 @@ const CLBookings = () => {
   useEffect(() => {
     dispatch(viewUserBookings(user?.id));
   }, []);
-  return (
+  const isLoading= useIsLoading();
+
+  return isLoading ? (
+    <Loading />
+  ) :
+   (
     <div className="w-full p-4  flex justify-center mt-4">
       <div className="w-[70%] flex-col flex justify-between">
         <div className="w-full bg-white p-8 flex  justify-between shadow-xl">

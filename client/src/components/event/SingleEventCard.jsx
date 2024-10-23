@@ -8,6 +8,8 @@ import {useNavigate} from 'react-router-dom'
 import { createBooking } from "../../redux/actions/bookingAction";
 import { deleteEvent } from "../../redux/actions/eventAction";
 import { notify } from "../../utils/toast";
+import { useIsLoading } from "../loading/LoadingHook";
+import Loading from "../loading/Loading";
 
 const SingleEventCard = ({ event }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -21,7 +23,11 @@ const SingleEventCard = ({ event }) => {
     dispatch(deleteEvent(event._id))
     navigate(-1)
   }
-  return (
+  const isLoading= useIsLoading();
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="mx-auto min-h-[80vh] flex items-center w-full justify-center px-8">
       <div className="flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5">
         <div

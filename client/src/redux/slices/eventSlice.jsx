@@ -20,19 +20,22 @@ const eventSlice = createSlice({
   reducers: {
     filterBySearch: (state, action) => {
       const keyword = action.payload.toLowerCase();
+      
       if (!keyword) {
+        
         state.filteredEvents = [...state.allEvents];
       } else {
-      state.filteredEvents = state.filteredEvents.filter(
+      
+      state.filteredEvents =[ ...state.allEvents.filter(
         (event) =>
           event.title.toLowerCase().includes(keyword) ||
           event.description.toLowerCase().includes(keyword)
-      );
+      )];
       }
     },
     filterByPrice: (state, action) => {
       const { min, max } = action.payload;
-      if (min === 0 && max === 50000) {
+      if (min === 0 || max === 50000) {
         state.filteredEvents = [...state.allEvents];
       } else {
       state.filteredEvents = state.filteredEvents.filter(

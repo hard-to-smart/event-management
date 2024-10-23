@@ -3,6 +3,8 @@ import BookingRow from "./BookingRow";
 import { useDispatch, useSelector } from "react-redux";
 import { viewAllBookings } from "../../redux/actions/bookingAction";
 import BookingFilter from "./BookingFilter"; // Import the filter component
+import Loading from "../loading/Loading";
+import { useIsLoading } from "../loading/LoadingHook";
 
 const BookingTable = () => {
   const dispatch = useDispatch();
@@ -27,7 +29,11 @@ const BookingTable = () => {
     }
   };
 
-  return (
+  const isLoading= useIsLoading();
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="relative overflow-x-auto w-fit h-fit shadow-md sm:rounded-lg">
       <BookingFilter onFilterChange={handleFilterChange} />
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 font-semibold ">

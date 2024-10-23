@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { viewAllEvents } from "../../redux/actions/eventAction";
 import EventCard from "../../components/event/EventCard";
 import { useNavigate } from "react-router-dom";
-
+import { useIsLoading } from "../../components/loading/LoadingHook";
+import Loading from "../../components/loading/Loading";
 const CLAllEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,8 +18,12 @@ const CLAllEvents = () => {
   const handleEventClick = (event) => {
     navigate(`/category/${event.category}/event/${event._id}`, { state: { event } });
   };
+  const isLoading= useIsLoading();
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : 
+   (
     <div className="flex flex-row h-[80vh]">
       <FilteringComponent />
       <div className="flex flex-wrap overflow-y-auto justify-center">
